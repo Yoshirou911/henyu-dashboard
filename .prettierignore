@@ -1,0 +1,7 @@
+.next
+node_modules
+public/sw.js
+public/swe-worker-*.js
+*.log
+pnpm-lock.yaml
+package-lock.json
