@@ -3,6 +3,10 @@
 import { CalendarClock, GraduationCap, Pencil } from "lucide-react";
 import Link from "next/link";
 import { Meter, scoreColor } from "@/components/common/meter";
+import {
+  DimensionsLine,
+  useLearningDimensions,
+} from "@/components/learning-dimensions/dimensions-ui";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProgressRing } from "@/components/ui/progress";
 import { longDateLabel } from "@/lib/date";
@@ -56,6 +60,7 @@ export function CountdownCard({ model }: { model: StudyModel }) {
 /** 第一志望の準備度 — only subjects that university requires, by its weights (spec §5). */
 export function ReadinessCard({ model }: { model: StudyModel }) {
   const primary = model.primaryUniversity;
+  const dims = useLearningDimensions(model)?.primary;
   if (!primary) {
     return (
       <Card className="p-5">
@@ -81,33 +86,39 @@ export function ReadinessCard({ model }: { model: StudyModel }) {
           全志望校 →
         </Link>
       </CardHeader>
-      <CardContent className="flex items-center gap-5">
-        <ProgressRing value={primary.readiness.score} size={112} strokeWidth={10}>
-          <span className="text-2xl font-semibold tabular-nums">
-            {Math.round(primary.readiness.score)}
-            <span className="text-muted-foreground text-sm">%</span>
-          </span>
-        </ProgressRing>
-        <ul className="min-w-0 flex-1 space-y-2">
-          {primary.readiness.breakdown.map((b) => (
-            <li key={b.subjectId} className="space-y-0.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-medium">
-                  {model.subjectById.get(b.subjectId)?.name}
-                  <span className="text-muted-foreground ml-1 text-[10px]">
-                    配点{Math.round(b.share * 100)}%
+      <CardContent className="space-y-3">
+        <div className="flex items-center gap-5">
+          <ProgressRing value={primary.readiness.score} size={112} strokeWidth={10}>
+            <span className="flex flex-col items-center leading-tight">
+              <span className="text-2xl font-semibold tabular-nums">
+                {Math.round(primary.readiness.score)}
+                <span className="text-muted-foreground text-sm">%</span>
+              </span>
+              <span className="text-muted-foreground text-[10px]">習熟度</span>
+            </span>
+          </ProgressRing>
+          <ul className="min-w-0 flex-1 space-y-2">
+            {primary.readiness.breakdown.map((b) => (
+              <li key={b.subjectId} className="space-y-0.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium">
+                    {model.subjectById.get(b.subjectId)?.name}
+                    <span className="text-muted-foreground ml-1 text-[10px]">
+                      配点{Math.round(b.share * 100)}%
+                    </span>
                   </span>
-                </span>
-                <span className="text-muted-foreground tabular-nums">{Math.round(b.score)}%</span>
-              </div>
-              <Meter
-                value={b.score}
-                showValue={false}
-                label={`${model.subjectById.get(b.subjectId)?.name}の習熟度`}
-              />
-            </li>
-          ))}
-        </ul>
+                  <span className="text-muted-foreground tabular-nums">{Math.round(b.score)}%</span>
+                </div>
+                <Meter
+                  value={b.score}
+                  showValue={false}
+                  label={`${model.subjectById.get(b.subjectId)?.name}の習熟度`}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+        {dims ? <DimensionsLine dims={dims} showMastery={false} /> : null}
       </CardContent>
     </Card>
   );

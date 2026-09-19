@@ -4,10 +4,14 @@ import { ArrowLeft, ArrowRight, ClipboardPlus } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 import { EmptyState } from "@/components/common/empty-state";
-import { Meter, scoreColor } from "@/components/common/meter";
+import { Meter } from "@/components/common/meter";
 import { PageHeader } from "@/components/common/page-header";
 import { StatCard } from "@/components/common/stat-card";
 import { SubjectOutlookCard, useForecast } from "@/components/forecast/forecast-ui";
+import {
+  SubjectDimensionsCard,
+  useLearningDimensions,
+} from "@/components/learning-dimensions/dimensions-ui";
 import { useRecorder } from "@/components/record/record-provider";
 import { EVALUATION_LABEL } from "@/components/subjects/subjects-screen";
 import { TopicTable } from "@/components/subjects/topic-table";
@@ -22,6 +26,7 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
   const model = useStudyModel();
   const { openRecord } = useRecorder();
   const forecast = useForecast(model);
+  const dimensions = useLearningDimensions(model);
 
   const byCategory = useMemo(() => {
     const map = new Map<string, TopicMetrics[]>();
@@ -53,6 +58,8 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
 
   const weak = model.weakList.filter((m) => m.subject.id === subjectId).slice(0, 5);
   const outlook = forecast?.bySubject.get(subjectId);
+  const dims = dimensions?.bySubject.get(subjectId);
+  const catDims = new Map(dims?.categories.map((c) => [c.categoryId, c]));
 
   return (
     <div className="space-y-6">
@@ -76,14 +83,9 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
         }
       />
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatCard
-          label="習熟度"
-          value={
-            <span style={{ color: scoreColor(summary.score) }}>{Math.round(summary.score)}%</span>
-          }
-          hint={`ステータス進捗 ${Math.round(summary.statusPercent)}%`}
-        />
+      {dims ? <SubjectDimensionsCard dims={dims} /> : null}
+
+      <div className="grid grid-cols-3 gap-3">
         <StatCard label="今週" value={formatMinutes(summary.weekMinutes)} />
         <StatCard label="弱点" value={`${summary.weakCount}件`} />
         <StatCard label="今日の復習" value={`${summary.dueReviewCount}件`} />
@@ -120,7 +122,8 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
                 <div className="flex items-center justify-between gap-2 text-sm">
                   <span className="font-medium">{c.category.name}</span>
                   <span className="text-muted-foreground text-xs tabular-nums">
-                    習熟度 {Math.round(c.score)}% ・ {c.doneCount}/{c.topicCount}
+                    範囲 {Math.round(catDims.get(c.category.id)?.coverage ?? 0)}% ・ 習熟度{" "}
+                    {Math.round(c.score)}% ・ {c.doneCount}/{c.topicCount}
                   </span>
                 </div>
                 <Meter value={c.score} showValue={false} label={`${c.category.name}の習熟度`} />

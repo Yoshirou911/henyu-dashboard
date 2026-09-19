@@ -4,6 +4,10 @@ import { MoreVertical, Plus, Star } from "lucide-react";
 import { useState } from "react";
 import { Meter, scoreColor } from "@/components/common/meter";
 import { PageHeader } from "@/components/common/page-header";
+import {
+  DimensionsLine,
+  useLearningDimensions,
+} from "@/components/learning-dimensions/dimensions-ui";
 import { useRepository } from "@/components/providers/repository-provider";
 import { UniversityDialog } from "@/components/universities/university-dialog";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +30,7 @@ import type { UniversitySummary } from "@/lib/model/buildStudyModel";
 export function UniversitiesScreen() {
   const repo = useRepository();
   const model = useStudyModel();
+  const dimensions = useLearningDimensions(model);
   const [editing, setEditing] = useState<UniversitySummary | "new" | null>(null);
 
   if (!model) {
@@ -42,7 +47,7 @@ export function UniversitiesScreen() {
     <div className="space-y-6">
       <PageHeader
         title="志望校"
-        description="準備度 = 各大学の必要科目の習熟度を、その大学の配点の重みで平均したもの。"
+        description="準備度 = 各大学の必要科目の習熟度を、その大学の配点の重みで平均したもの。学習範囲・本番準備度も同じ重みで集計（合格の可能性ではありません）。"
         actions={
           <Button size="sm" variant="outline" onClick={() => setEditing("new")}>
             <Plus className="size-4" /> 追加
@@ -145,6 +150,13 @@ export function UniversitiesScreen() {
                   <li className="text-muted-foreground text-xs">必要科目が未設定です。</li>
                 ) : null}
               </ul>
+
+              {dimensions?.byUniversity.get(u.university.id) && u.readiness.breakdown.length > 0 ? (
+                <DimensionsLine
+                  dims={dimensions.byUniversity.get(u.university.id)!}
+                  className="mt-2"
+                />
+              ) : null}
 
               <dl className="text-muted-foreground mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
                 {u.university.examDate ? (

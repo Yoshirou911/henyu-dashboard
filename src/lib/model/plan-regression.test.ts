@@ -3,14 +3,16 @@ import { DAY_MS } from "@/lib/date";
 import { DexieRepository } from "@/lib/db/dexie-repository";
 import { DB_NAME, HenyuDB } from "@/lib/db/schema";
 import { buildForecast } from "@/lib/forecast/buildForecast";
+import { buildLearningDimensions } from "@/lib/learning-dimensions/buildLearningDimensions";
 import { buildStudyModel } from "@/lib/model/buildStudyModel";
 import type { StudySnapshot } from "@/lib/model/snapshot";
 import type { StudySession } from "@/lib/types";
 
 /*
  * Golden test for today's plan (Phase 3.0a behaviour). Forecasting (Phase
- * 3.0b) is display-only and must never change what the planner produces;
- * if this snapshot changes, the planner changed.
+ * 3.0b) and the learning dimensions (Phase 3.1) are display-only and must
+ * never change what the planner produces; if this snapshot changes, the
+ * planner changed.
  */
 
 const NOW = new Date("2026-09-20T21:00:00").getTime();
@@ -189,5 +191,17 @@ describe("today plan regression (Phase 3.0a)", () => {
     const forecast = buildForecast(model);
     expect(forecast.subjects.length).toBeGreaterThan(0);
     expect([30, 60, 120, 180].map((m) => model.buildPlan(m))).toEqual(before);
+  });
+
+  it("is unchanged by computing the learning dimensions (Phase 3.1)", async () => {
+    const base = await fixture();
+    const expected = describePlan(base);
+    const model = buildStudyModel(base, NOW);
+    const before = [30, 60, 90, 120, 180].map((m) => model.buildPlan(m));
+    const dims = buildLearningDimensions(model);
+    expect(dims.subjects.length).toBeGreaterThan(0);
+    expect(dims.primary).toBeDefined();
+    expect([30, 60, 90, 120, 180].map((m) => model.buildPlan(m))).toEqual(before);
+    expect(describePlan(base)).toEqual(expected);
   });
 });
