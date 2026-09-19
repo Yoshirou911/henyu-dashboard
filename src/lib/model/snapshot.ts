@@ -1,4 +1,5 @@
 import type {
+  ActivityLog,
   Category,
   DailyGoal,
   ExerciseResult,
@@ -33,4 +34,10 @@ export interface StudySnapshot {
   pastExams: PastExam[];
   pastExamProblems: PastExamProblem[];
   dailyGoals: DailyGoal[];
+  /**
+   * `status_change` activity logs — the history of when topics moved.
+   * Read only by forecasting (Phase 3.0b); the planner never uses it.
+   * Optional so older fixtures / callers stay valid.
+   */
+  statusLogs?: ActivityLog[];
 }

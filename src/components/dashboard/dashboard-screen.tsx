@@ -14,11 +14,12 @@ import {
   OverallSubjectsCard,
   ReadinessCard,
 } from "@/components/dashboard/strategy-cards";
+import { PaceCard } from "@/components/forecast/forecast-ui";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useStudyModel } from "@/hooks/use-study-model";
 
 /**
- * 受験司令塔. Order follows spec §25: countdown → 第一志望準備度 → 今日やること →
+ * 受験司令塔. Order follows spec §25: countdown → 第一志望準備度 (+ 受験ペース) → 今日やること →
  * 要注意 → 弱点 → 今月の目標 → 次のマイルストーン → 現在の単元.
  */
 export function DashboardScreen() {
@@ -41,12 +42,19 @@ export function DashboardScreen() {
     <div className="space-y-6">
       <CountdownCard model={model} />
       <div className="grid gap-6 lg:grid-cols-5">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 lg:space-y-6">
           <ReadinessCard model={model} />
+          {/* desktop: beside today's plan; phones: below it (today's plan stays near the top) */}
+          <div className="hidden lg:block">
+            <PaceCard model={model} />
+          </div>
         </div>
         <div className="lg:col-span-3">
           <TodayPlanCard model={model} />
         </div>
+      </div>
+      <div className="lg:hidden">
+        <PaceCard model={model} />
       </div>
       <AlertsCard model={model} />
       <div className="grid gap-6 lg:grid-cols-3">

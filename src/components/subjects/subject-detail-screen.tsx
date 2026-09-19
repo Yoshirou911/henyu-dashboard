@@ -7,6 +7,7 @@ import { EmptyState } from "@/components/common/empty-state";
 import { Meter, scoreColor } from "@/components/common/meter";
 import { PageHeader } from "@/components/common/page-header";
 import { StatCard } from "@/components/common/stat-card";
+import { SubjectOutlookCard, useForecast } from "@/components/forecast/forecast-ui";
 import { useRecorder } from "@/components/record/record-provider";
 import { EVALUATION_LABEL } from "@/components/subjects/subjects-screen";
 import { TopicTable } from "@/components/subjects/topic-table";
@@ -20,6 +21,7 @@ import { formatMinutes } from "@/lib/utils";
 export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
   const model = useStudyModel();
   const { openRecord } = useRecorder();
+  const forecast = useForecast(model);
 
   const byCategory = useMemo(() => {
     const map = new Map<string, TopicMetrics[]>();
@@ -50,6 +52,7 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
   }
 
   const weak = model.weakList.filter((m) => m.subject.id === subjectId).slice(0, 5);
+  const outlook = forecast?.bySubject.get(subjectId);
 
   return (
     <div className="space-y-6">
@@ -85,6 +88,8 @@ export function SubjectDetailScreen({ subjectId }: { subjectId: string }) {
         <StatCard label="弱点" value={`${summary.weakCount}件`} />
         <StatCard label="今日の復習" value={`${summary.dueReviewCount}件`} />
       </div>
+
+      {outlook ? <SubjectOutlookCard forecast={outlook} /> : null}
 
       {summary.focus ? (
         <Card className="flex items-center gap-3 p-4">

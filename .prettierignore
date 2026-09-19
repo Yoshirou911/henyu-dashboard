@@ -5,3 +5,5 @@ public/swe-worker-*.js
 *.log
 pnpm-lock.yaml
 package-lock.json
+# byte-exact backup fixtures (migration tests) — never reformat
+src/test/fixtures

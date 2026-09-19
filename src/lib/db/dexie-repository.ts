@@ -332,6 +332,7 @@ export class DexieRepository implements DataRepository {
       pastExams,
       pastExamProblems,
       dailyGoals,
+      statusLogs,
     ] = await Promise.all([
       this.getSettings(),
       this.db.subjects.orderBy("order").toArray(),
@@ -348,6 +349,7 @@ export class DexieRepository implements DataRepository {
       this.db.pastExams.toArray(),
       this.db.pastExamProblems.toArray(),
       this.db.dailyGoals.where("date").aboveOrEqual(since).toArray(),
+      this.db.activityLogs.where("type").equals("status_change").toArray(),
     ]);
     return {
       settings,
@@ -365,6 +367,7 @@ export class DexieRepository implements DataRepository {
       pastExams,
       pastExamProblems,
       dailyGoals,
+      statusLogs,
     };
   }
 
