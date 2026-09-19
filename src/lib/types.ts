@@ -163,6 +163,12 @@ export type ActivityType =
   | "mock_added"
   | "seed";
 
+/**
+ * Activity feed. `status_change` entries (meta `{ from, to }`) are also the
+ * only history of *when* a topic's status moved, which Phase 3 uses for
+ * learning-speed and weekly-review analysis — treat them as fact data:
+ * never prune or rewrite them. See docs/PHASE3_DESIGN.md §3.
+ */
 export interface ActivityLog {
   id: ID;
   type: ActivityType;

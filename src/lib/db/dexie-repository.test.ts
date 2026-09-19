@@ -287,6 +287,76 @@ describe("exercise results & reviews", () => {
   });
 });
 
+/*
+ * Phase 3 (学習速度・週次レビュー) reconstructs status history from
+ * `status_change` activity logs — they are the only record of *when* a topic
+ * moved. These tests pin that every status path writes one with from/to.
+ * See docs/PHASE3_DESIGN.md §3.
+ */
+describe("status history for Phase 3", () => {
+  const statusLogs = async (topicId: string) =>
+    (await db.activityLogs.toArray())
+      .filter((l) => l.type === "status_change" && l.topicId === topicId)
+      .sort((a, b) => a.at - b.at);
+
+  it("logs from/to and the subject on a manual status change", async () => {
+    await repo.initialize();
+    const t = await mathTopic("展開");
+    await repo.setTopicStatus(t.id, 2);
+    await repo.setTopicStatus(t.id, 3);
+    const logs = await statusLogs(t.id);
+    expect(logs.map((l) => l.meta)).toEqual([
+      { from: 0, to: 2 },
+      { from: 2, to: 3 },
+    ]);
+    expect(logs.every((l) => l.subjectId === "subj_math" && l.at > 0)).toBe(true);
+  });
+
+  it("logs the automatic 未学習 → 学習中 move from an exercise result", async () => {
+    await repo.initialize();
+    const t = await mathTopic("関数の極限");
+    await repo.addExerciseResult({
+      topicId: t.id,
+      attemptedCount: 3,
+      correctCount: 1,
+      difficulty: "basic",
+      type: "practice",
+    });
+    expect((await statusLogs(t.id)).map((l) => l.meta)).toEqual([{ from: 0, to: 1 }]);
+  });
+
+  it("logs a status lowered by a failed review", async () => {
+    await repo.initialize();
+    await repo.updateSettings({ autoLowerStatusOnFailedReview: true });
+    const t = await mathTopic("展開");
+    await repo.setTopicStatus(t.id, 3);
+    const review = (await repo.listOpenReviews()).find((r) => r.topicId === t.id)!;
+    await repo.completeReview(review.id, "failed");
+    expect((await statusLogs(t.id)).map((l) => l.meta)).toEqual([
+      { from: 0, to: 3 },
+      { from: 3, to: 2 },
+    ]);
+  });
+
+  it("does not log a no-op status change", async () => {
+    await repo.initialize();
+    const t = await mathTopic("展開");
+    await repo.setTopicStatus(t.id, 1);
+    await repo.setTopicStatus(t.id, 1);
+    expect(await statusLogs(t.id)).toHaveLength(1);
+  });
+
+  it("keeps a deleted topic's study time attributable to its subject", async () => {
+    await repo.initialize();
+    const t = await mathTopic("因数分解");
+    await repo.recordStudy({ topicId: t.id, subjectId: null, minutes: 20, source: "manual" });
+    await repo.deleteTopic(t.id);
+    const [session] = await repo.listStudySessions();
+    expect(session?.topicId).toBeNull();
+    expect(session?.subjectId).toBe("subj_math");
+  });
+});
+
 describe("deleteTopic", () => {
   it("removes dangling dependency edges", async () => {
     await repo.initialize();
