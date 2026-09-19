@@ -6,7 +6,7 @@ import { useRecorder } from "@/components/record/record-provider";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toaster";
 import { useTimer } from "@/hooks/use-timer";
-import type { PlanItem, TodayPlan } from "@/lib/planner/buildTodayPlan";
+import { PLAN_CONFIG, type PlanItem, type TodayPlan } from "@/lib/planner/buildTodayPlan";
 import { cn, formatMinutes } from "@/lib/utils";
 
 export function useStartPlanItem() {
@@ -43,6 +43,19 @@ export function PlanList({
   const start = useStartPlanItem();
   const { openRecord } = useRecorder();
   const items = limit ? plan.items.slice(0, limit) : plan.items;
+
+  if (
+    plan.items.length === 0 &&
+    plan.doneMinutes > 0 &&
+    plan.availableMinutes < PLAN_CONFIG.minBlock
+  ) {
+    return (
+      <EmptyState
+        title="今日使える時間に到達しました"
+        description="さらに勉強する場合は「今日使える時間」を増やすと、続きの計画が出ます。"
+      />
+    );
+  }
 
   if (plan.items.length === 0) {
     return (

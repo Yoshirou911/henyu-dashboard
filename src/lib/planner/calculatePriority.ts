@@ -2,7 +2,9 @@ import type { Status } from "@/lib/types";
 
 /**
  * priorityScore for a study candidate (spec §19). Additive, rule-based,
- * config-driven. Each rule that fires contributes points *and* a short
+ * config-driven. Ranks topics *within* the day; how the day's time is split
+ * between subjects (incl. catching up on deficits) is decided only by the
+ * planner's budgets (Phase 3.0a), so subject balance is not scored here. Each rule that fires contributes points *and* a short
  * human-readable reason (spec §20), so the planner can explain itself.
  */
 export const PRIORITY_CONFIG = {
@@ -32,8 +34,6 @@ export const PRIORITY_CONFIG = {
   staleMinDays: 4,
   stalePerDay: 1,
   staleCap: 10,
-  /** allocation deficit ratio (0–1) × this */
-  allocationFactor: 15,
   /** exam within this many days: 第一志望-relevant points ×1.5 */
   examSoonDays: 90,
   examSoonMultiplier: 1.5,
@@ -66,8 +66,6 @@ export interface PriorityInput {
   blocksCount: number;
   depsMet: boolean;
   daysSinceStudied: number | null;
-  /** 0–1: how far the subject is below its time allocation this week */
-  allocationDeficit: number;
   daysToExam: number | null;
   minutesLast2Days: number;
 }
@@ -142,12 +140,6 @@ export function calculatePriority(input: PriorityInput, cfg = PRIORITY_CONFIG): 
     add(
       Math.min(cfg.staleCap, input.daysSinceStudied * cfg.stalePerDay),
       `${input.daysSinceStudied}日間未学習`,
-    );
-  }
-  if (input.allocationDeficit > 0) {
-    add(
-      input.allocationDeficit * cfg.allocationFactor,
-      input.allocationDeficit >= 0.5 ? "今週の予定時間を下回っています" : null,
     );
   }
 

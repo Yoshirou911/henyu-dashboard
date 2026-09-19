@@ -407,9 +407,9 @@ export function buildStudyModel(snapshot: StudySnapshot, nowMs: number = Date.no
     subjectIds: activeSubjects.map((s) => s.id),
     sessions: snapshot.sessions,
     subjectOfSession: (s) => s.subjectId ?? subjectOfTopic(s.topicId),
+    weeklyGoalMinutes: settings.weeklyStudyGoalMin,
     now,
   });
-  const allocById = new Map(allocation.map((a) => [a.subjectId, a]));
 
   /* ---------------- candidates + priority ---------------- */
   const activeIds = new Set(activeSubjects.map((s) => s.id));
@@ -431,7 +431,6 @@ export function buildStudyModel(snapshot: StudySnapshot, nowMs: number = Date.no
       blocksCount: m.dependents.length,
       depsMet: m.depsMet,
       daysSinceStudied: m.daysSinceStudied,
-      allocationDeficit: allocById.get(m.subject.id)?.deficitRatio ?? 0,
       daysToExam,
       minutesLast2Days: m.minutesLast2Days,
     };
@@ -444,6 +443,7 @@ export function buildStudyModel(snapshot: StudySnapshot, nowMs: number = Date.no
       evaluationType: m.evaluationType,
       status: m.topic.status,
       isVocab: m.isVocab,
+      depsMet: m.depsMet,
     };
     if (m.openReview && m.overdueDays !== null) {
       const p = calculatePriority({ ...base, kind: "review", overdueDays: m.overdueDays });
@@ -616,7 +616,12 @@ export function buildStudyModel(snapshot: StudySnapshot, nowMs: number = Date.no
     candidates,
     availableMinutesToday,
     buildPlan: (minutes: number) =>
-      buildTodayPlan({ availableMinutes: minutes, candidates, allocation }),
+      buildTodayPlan({
+        availableMinutes: minutes,
+        candidates,
+        allocation,
+        doneMinutes: todayMinutes,
+      }),
     monthly: monthlySummary(month, snapshot.monthlyGoals, statusOf, new Date(now)),
     nextMilestone,
     weekMinutes,

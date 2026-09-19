@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { toast } from "@/components/ui/toaster";
 import type { StudyModel } from "@/lib/model/buildStudyModel";
+import { PLAN_CONFIG } from "@/lib/planner/buildTodayPlan";
 import type { EvaluationType, ID } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -77,8 +78,10 @@ export function AllocationSettings({ model }: { model: StudyModel }) {
                 />
                 <span className="text-muted-foreground text-xs tabular-nums">
                   目標 {Math.round(share)}% ・ 直近7日 {Math.round((a?.actualShare ?? 0) * 100)}%
-                  {a && a.deficitRatio >= 0.5 && a.targetShare > 0 ? (
-                    <span className="text-warning ml-1">不足</span>
+                  {a &&
+                  a.targetShare > 0 &&
+                  a.deficitMinutes >= PLAN_CONFIG.deficitNoticeMinutes ? (
+                    <span className="text-warning ml-1">不足 {Math.round(a.deficitMinutes)}分</span>
                   ) : null}
                 </span>
               </li>

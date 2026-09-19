@@ -297,7 +297,11 @@ describe("status history for Phase 3", () => {
   const statusLogs = async (topicId: string) =>
     (await db.activityLogs.toArray())
       .filter((l) => l.type === "status_change" && l.topicId === topicId)
-      .sort((a, b) => a.at - b.at);
+      // two changes can share a millisecond; a replay then orders them by chaining to → from
+      .sort(
+        (a, b) =>
+          a.at - b.at || (a.meta?.to === b.meta?.from ? -1 : b.meta?.to === a.meta?.from ? 1 : 0),
+      );
 
   it("logs from/to and the subject on a manual status change", async () => {
     await repo.initialize();
@@ -443,5 +447,25 @@ describe("daily plan inputs", () => {
     const g = await repo.getDailyGoal("2026-09-19");
     expect(g?.availableMinutes).toBe(90);
     expect(g?.text).toBe("極限を基本OK");
+  });
+
+  it("re-plans only the time left today and keeps math as the main subject", async () => {
+    await repo.initialize();
+    const t = await mathTopic("因数分解");
+    await repo.recordStudy({ topicId: t.id, subjectId: null, minutes: 30, source: "manual" });
+    const model = buildStudyModel(await repo.getSnapshot());
+    const plan = model.buildPlan(120);
+    expect(plan.doneMinutes).toBe(30);
+    expect(plan.availableMinutes).toBe(90);
+    expect(plan.plannedMinutes).toBeLessThanOrEqual(90);
+    expect(plan.items[0]?.subjectId).toBe("subj_math");
+    const math = plan.items
+      .filter((i) => i.subjectId === "subj_math")
+      .reduce((s, i) => s + i.minutes, 0);
+    const others = new Map<string, number>();
+    for (const i of plan.items)
+      if (i.subjectId !== "subj_math")
+        others.set(i.subjectId, (others.get(i.subjectId) ?? 0) + i.minutes);
+    expect(math).toBeGreaterThanOrEqual(Math.max(0, ...others.values()));
   });
 });

@@ -25,8 +25,8 @@ export function TodayPlanCard({ model }: { model: StudyModel }) {
         <div className="space-y-1">
           <CardTitle>今日やること</CardTitle>
           <CardDescription className="tabular-nums">
-            予定 {formatMinutes(plan.plannedMinutes)} / 使える時間{" "}
-            {formatMinutes(plan.availableMinutes)}
+            予定 {formatMinutes(plan.plannedMinutes)} / 残り {formatMinutes(plan.availableMinutes)}
+            {plan.doneMinutes > 0 ? ` ・ 実施済 ${formatMinutes(plan.doneMinutes)}` : ""}
           </CardDescription>
         </div>
         <Link href="/today" className="text-primary shrink-0 text-xs hover:underline">

@@ -43,7 +43,8 @@ export function TodayScreen() {
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <CardTitle>今日の推奨学習</CardTitle>
             <CardDescription className="tabular-nums">
-              目標 {formatMinutes(plan.availableMinutes)} ・ 予定{" "}
+              目標 {formatMinutes(plan.totalMinutes)}
+              {plan.doneMinutes > 0 ? ` ・ 実施済 ${formatMinutes(plan.doneMinutes)}` : ""} ・ 予定{" "}
               {formatMinutes(plan.plannedMinutes)}
             </CardDescription>
           </div>
