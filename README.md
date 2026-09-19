@@ -1,8 +1,8 @@
 # 編入対策 学習進捗ダッシュボード
 
-電気通信大学 情報理工学域Ⅰ類 3年次編入対策のための、**個人用・学習進捗管理アプリ**です。
-「今どこまで終わったか / あと何が残っているか / 今日何をやるか / 試験まであと何日か」を
-一目で把握することに特化しています。学習教材そのものではありません。
+電気通信大学 情報理工学域Ⅰ類（第一志望）ほか情報系3年次編入のための、**個人用の受験司令塔**です。
+記録 → 分析 → 復習 → 優先順位決定 → 今日の勉強 のループを回し、
+「次に何を勉強すればいいか」を迷わなくすることが目的です。学習教材そのものではありません。
 
 - 完全ローカル動作（IndexedDB）。ブラウザを閉じてもデータは保持されます。
 - ダークモード基調のモダンな UI。PC / スマートフォン両対応の完全レスポンシブ。
@@ -66,58 +66,104 @@ npm run start   # http://localhost:3000 で配信
 
 ### 画面構成
 
-| ルート       | 内容                                                                                     |
-| ------------ | ---------------------------------------------------------------------------------------- |
-| `/`          | ダッシュボード（試験カウントダウン / 総合進捗 / 今日の目標 / 次にやること / 最近の進捗） |
-| `/today`     | 今日やることに集中するページ（目標・対象単元・復習候補・タイマー）                       |
-| `/roadmap`   | ロードマップ可視化 + 分野・単元の一覧 / 追加 / 名前変更 / 並び替え / 削除                |
-| `/analytics` | 週間・月間学習時間、分野別内訳、進捗推移、過去問得点推移（Recharts）                     |
-| `/review`    | 固定間隔（1・3・7・14・30 日）の復習キューと苦手単元                                     |
-| `/settings`  | 試験日・学習目標・テーマ・バックアップ・初期化                                           |
-| `/setup`     | 初回セットアップ（学習済み単元の申告）                                                   |
+| ルート                        | 内容                                                                                                                                                              |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                           | 受験司令塔：第一志望カウントダウン → 電通大準備度 → 今日やること → 要注意 → 弱点TOP3 → 今月の目標 → 次のマイルストーン → 現在の単元（次に進む条件）→ 編入学習全体 |
+| `/today`                      | 今日の推奨学習（使える時間 30/60/90/120/180/カスタム で再計画）・タイマー・今日の復習                                                                             |
+| `/review`                     | 優先順位付き復習キュー（期限超過→習熟度→失敗回数→第一志望の重要度→前提単元）・3ボタン入力・予定・履歴                                                             |
+| `/subjects`, `/subjects/[id]` | 科目一覧と科目別ダッシュボード（習熟度・分野別・今週・弱点・復習・次の単元・単元ごとの記録）                                                                      |
+| `/weakness`                   | 全科目横断の弱点ランキングと「改善中」                                                                                                                            |
+| `/roadmap`                    | 科目切替つきロードマップ。単元詳細で習熟度内訳・正答率・次に進む条件（手動override）・前提単元を編集                                                              |
+| `/goals`                      | 月間目標（前倒し/予定通り/少し遅れ/大幅遅れ）とマイルストーン                                                                                                     |
+| `/universities`               | 志望校10校・準備度・必要科目/重要度/配点の重みを編集                                                                                                              |
+| `/exams`                      | 編入過去問（大問ごとの単元と○△×）と模試（偏差値・順位・失点単元）                                                                                                 |
+| `/analytics`                  | 週間/月間学習時間、科目別・分野別内訳、進捗推移                                                                                                                   |
+| `/settings`                   | 第一志望の試験日、科目配分、科目の追加/並び替え/非表示/アーカイブ、受験科目テンプレート追加、バックアップ                                                         |
+| `/setup`                      | 初回セットアップ                                                                                                                                                  |
 
 ### ディレクトリ
 
 ```
 src/
   app/                    App Router のルート・レイアウト・PWA manifest・Service Worker
-    (dashboard)/          サイドバー付きの主要画面グループ
-  components/
-    ui/                   Base UI ベースの汎用プリミティブ（button, dialog, select, ...）
-    layout/               サイドバー・トップバー・モバイルナビ
-    dashboard/ today/ roadmap/ analytics/ review/ weakness/  各機能の画面部品
-    providers/            テーマ / リポジトリ初期化 / タイマーの Context
-  hooks/                  useLive（Dexie live query ラッパ）・useTimer など
+  components/             画面部品（dashboard / today / review / subjects / weakness / roadmap /
+                          goals / universities / exams / planner / record / settings / ui …）
+  hooks/
+    use-study-model.ts    全派生値（下記エンジン）を1か所で計算して全画面に配る
+    use-timer.tsx         学習タイマー（予定時間つき・終了時に記録ダイアログ）
   lib/
     types.ts              ドメイン型（Subject → Category → Topic の一般化階層）
-    progress.ts           進捗率の加重計算（純関数）
-    review-schedule.ts    復習間隔ロジック（純関数）
-    analytics.ts          集計・進捗推移の再構築・苦手判定（純関数）
+    mastery/              accuracy.ts / calculateMastery.ts / readyForNext.ts
+    weakness/             calculateWeakness.ts
+    planner/              calculatePriority.ts / subjectAllocation.ts / buildTodayPlan.ts
+    readiness/            universityReadiness.ts
+    review/               prioritizeReviews.ts （＋ lib/review-schedule.ts）
+    goals/                monthlyProgress.ts
+    model/                snapshot.ts / buildStudyModel.ts（エンジンの統合）
     db/
-      schema.ts           Dexie スキーマ定義
-      seed.ts             初期数学ロードマップ
+      schema.ts           Dexie スキーマ（version 1 / 2）
+      seed.ts             8科目テンプレート・前提単元・志望校・科目配分の初期値
       repository.ts       DataRepository インターフェース（UI が依存する唯一の窓口）
-      dexie-repository.ts  IndexedDB 実装
+      dexie-repository.ts IndexedDB 実装＋冪等な migration
 ```
+
+---
+
+## Phase 2：判断ロジック（すべてルールベース・係数は各ファイルの `*_CONFIG` で変更可）
+
+| ロジック      | ファイル                           | 概要                                                                                                                                                                                                                                                  |
+| ------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 正答率        | `mastery/accuracy.ts`              | 累計・**直近（最新20問の窓）**・基本/標準/発展・復習・過去問・模試                                                                                                                                                                                    |
+| masteryScore  | `mastery/calculateMastery.ts`      | ステータス基準（0/20/50/75/100）＋直近正答率の期待値との差・基本問題不安定・復習結果・忘却（14/30日）・継続・発展/過去問での得点・過去問/模試の失点。科目タイプ別：問題演習型は正答率重視、語学型は正答率＋学習量、面接型は模擬面接の完成度をブレンド |
+| 次へ進む条件  | `mastery/readyForNext.ts`          | 基本問題 直近80%以上 **かつ** 10問以上 **かつ** 基本OKから2日以降の復習70%以上（復習問題がなければ「できた/怪しい/できなかった」で代替）。手動override可                                                                                              |
+| weaknessScore | `weakness/calculateWeakness.ts`    | 低正答率・復習失敗/怪しい・時間の割に低習熟・停滞・過去問/模試の失点・復習期限超過（＋他の兆候がある時のみ第一志望の重要度）。改善中＝直近が以前より15pt以上上昇                                                                                      |
+| priorityScore | `planner/calculatePriority.ts`     | 上げる：期限超過・低習熟・弱点・第一志望で重要（本番90日以内は×1.5）・今月目標・学習中・次の単元・他単元の前提・低正答率・未学習日数・配分不足。下げる：定着/過去問レベル・前提未完了・高正答率・直近で十分学習・第一志望で不要。**理由テキスト付き** |
+| 前提単元      | `model/buildStudyModel.ts`         | 単元の `dependsOn` と、ロードマップ上の前提分野（未着手の単元のみ）を考慮。着手済みの単元はブロックしない                                                                                                                                             |
+| 科目配分      | `planner/subjectAllocation.ts`     | 設定の配分（初期：数学60/英語10/TOEIC5/C++5/アルゴ5/物理10/CS3/面接2）と直近7日の実績の差                                                                                                                                                             |
+| 今日の計画    | `planner/buildTodayPlan.ts`        | 復習を最大35%まで → 配分×不足率で科目予算 → 優先度順に配置 → **配分10%以上で7日間未学習の科目を強制的に1枠確保**（60分以上・学習履歴がある場合）→ 残りは予備                                                                                          |
+| 志望校準備度  | `readiness/universityReadiness.ts` | その大学の必要科目の習熟度を、大学ごとの重みで加重平均。**必要でない科目（例：電通大に対するC++）は準備度を動かさない**                                                                                                                               |
+| 月間目標      | `goals/monthlyProgress.ts`         | 単元＋目標ステータス指定なら自動で達成率、自由記述はチェック。経過日数との差で判定                                                                                                                                                                    |
 
 ---
 
 ## データ保存方式
 
 すべてのデータはブラウザの **IndexedDB** に保存され、`Dexie.js` 経由でアクセスします。
-`localStorage` は「実行中タイマーの一時保持」「テーマ選択」のみに使用し、
-学習データの正本にはしていません。
+`localStorage` は「実行中タイマーの一時保持」「テーマ選択」のみに使用します。
 
-テーブル（Dexie stores）:
+保存するのは**事実だけ**です。正答率・masteryScore・weaknessScore・準備度・今日の計画などの
+再計算可能な値はDBに保存せず、`buildStudyModel` が毎回計算します。
 
-`subjects` / `categories` / `topics` / `studySessions` / `reviews` /
-`dailyGoals` / `examScores` / `settings` / `activityLogs`
+| テーブル                                       | 内容                                                                                               |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `subjects` / `categories` / `topics`           | 科目→分野→単元（`evaluationType`、`dependsOn`、`readyOverride`、`hidden`/`archived` を v2 で追加） |
+| `studySessions`                                | 学習時間（v2 で `plannedMinutes`）                                                                 |
+| `exerciseResults`                              | 問題演習結果（topicId・日付・問題数・正解数・difficulty・type・memo）                              |
+| `reviews`                                      | 復習スケジュール（1・3・7・14・30日）                                                              |
+| `dailyGoals`                                   | 今日の目標・今日使える時間                                                                         |
+| `universities` / `universityRequirements`      | 志望校と、科目ごとの必須・重要度・重み                                                             |
+| `monthlyGoals` / `milestones`                  | 月間目標・長期マイルストーン                                                                       |
+| `mockExams` / `pastExams` / `pastExamProblems` | 模試・編入過去問・大問ごとの結果                                                                   |
+| `settings`                                     | `schemaVersion`、第一志望、科目配分、試験日など                                                    |
+| `activityLogs`                                 | 最近の進捗タイムライン・進捗推移の再構築                                                           |
+| `examScores`                                   | Phase 1 の過去問得点（互換のため保持。`pastExams` へ移行済み）                                     |
 
-- `topic` は `id / categoryId / name / description / status / weight / order /
-createdAt / updatedAt / lastStudiedAt` などを保持します。
-- 進捗率は単元の 5 段階ステータス（未学習 0 / 学習中 25 / 基本OK 50 / 定着 75 /
-  過去問レベル 100）と単元ごとの重要度 `weight` から自動計算されます（初期値は全て `weight = 1`）。
-- `settings` に `schemaVersion` を保持し、バックアップの互換性チェックに使用します。
+### Migration（schemaVersion 1 → 2）
+
+`DexieRepository.initialize()` が `settings.schemaVersion` を見て冪等に実行します。
+既存の科目・単元・ステータス・学習記録・目標には一切触れず、**足りないものだけ追加**します。
+
+1. 受験科目テンプレートのうち未登録の科目だけ追加（数学が登録済みなら数学は重複させない）
+2. 既存単元の前提関係（`dependsOn`）を、未設定の場合のみ補完
+3. 志望校10校と必要科目を追加（電通大の試験日は既存の設定を引き継ぐ）
+4. 科目配分の初期値を設定
+5. Phase 1 の `examScores` を `pastExams` にコピー
+
+v1 のバックアップJSONをインポートした場合も、取り込み後に同じ migration が走ります。
+新しいバージョンのアプリで作成されたバックアップは、データ欠落を防ぐため取り込みを拒否します。
+
+検証：`src/lib/db/migration-phase1.test.ts` が、Phase 1 のコード自身で生成した実データ相当のバックアップ
+（`src/test/fixtures/phase1-sample.json`・合成データ）を使い、既存行が1件も欠落・変更されないことを確認します。
 
 ### 読み込み中のちらつき防止
 
@@ -164,15 +210,18 @@ UI は Dexie を直接触らず、常に `src/lib/db/repository.ts` の
 
 ---
 
-## 実装済みの完成条件
+## 実装済みの機能
 
-- アプリ起動 / 初期数学ロードマップ生成 / 単元一覧表示 / ステータス変更
-- 進捗率の自動計算（加重対応） / ダッシュボード表示 / 今日の目標設定
-- 学習時間記録（タイマー + 手動入力） / 復習候補表示 / Analytics グラフ表示
-- IndexedDB への永続保存 / JSON バックアップ・復元
-- PWA としてインストール可能 / PC・スマホ両対応
+- **Phase 1**：単元ツリー・5段階ステータス・進捗率・今日の目標・学習タイマー・復習・Analytics・PWA・JSONバックアップ
+- **Phase 2**：8科目（数学・物理・英語・TOEIC・C/C++・アルゴリズム・CS基礎・面接）、志望校10校と必要科目/重み、
+  志望校準備度、編入学習全体、問題演習結果と正答率、masteryScore、weaknessScore、次へ進む条件、
+  復習キュー、今日の推奨学習（使える時間で再計画・科目配分考慮）、月間目標、マイルストーン、模試、編入過去問、
+  科目別ダッシュボード、弱点ページ、Phase 1 データの migration
 
 ## 意図的に実装していないもの
 
-SNS / フレンド / ランキング / AI チャット / AI 問題生成 / 課金 / 広告 /
+SNS / フレンド / ランキング / AI チャット / AI 問題生成 / 課金 / 広告 / Supabase移行 /
 複雑なアカウント管理 / 過剰なゲーミフィケーション・アニメーション。
+
+将来 AI を足す場合（誤答分析・問題生成・計画の文章化・過去問分析・面接練習）は、
+`buildStudyModel` の出力（弱点・理由付きの計画・正答率）を入力にできる構造になっています。

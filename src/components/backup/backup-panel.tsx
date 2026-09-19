@@ -72,8 +72,13 @@ export function BackupPanel() {
       toast({ title: "インポートが完了しました", variant: "success" });
       setPending(null);
       setTimeout(() => window.location.reload(), 400);
-    } catch {
-      toast({ title: "インポートに失敗しました", variant: "error" });
+    } catch (error) {
+      // replacing the data is a single transaction and rolls back on failure
+      toast({
+        title: "インポートに失敗しました",
+        description: error instanceof Error ? error.message : undefined,
+        variant: "error",
+      });
       setBusy(false);
     }
   }
@@ -121,7 +126,7 @@ export function BackupPanel() {
         <div className="border-destructive/30 bg-destructive/5 rounded-lg border p-3">
           <p className="text-foreground text-sm font-medium">全データを削除して初期化</p>
           <p className="text-muted-foreground mt-0.5 text-xs">
-            数学ロードマップだけの初期状態に戻します。取り消せません。
+            受験科目テンプレートと志望校だけの初期状態に戻します。取り消せません。
           </p>
           <Button
             variant="destructive"
@@ -151,10 +156,18 @@ export function BackupPanel() {
               <p className="text-muted-foreground text-xs">
                 作成日時: {new Date(pending.summary.exportedAt).toLocaleString("ja-JP")}
               </p>
-              {pending.summary.schemaMismatch ? (
-                <p className="bg-warning/15 text-warning rounded-md px-2 py-1 text-xs">
-                  スキーマバージョンが異なります（ファイル: {pending.summary.schemaVersion} /
-                  アプリ: {SCHEMA_VERSION}）。取り込めますが、確認してください。
+              {pending.summary.versionStatus === "older" ? (
+                <p className="bg-primary/10 text-primary rounded-md px-2 py-1 text-xs">
+                  旧バージョン（v{pending.summary.schemaVersion}
+                  ）のバックアップです。取り込み後、自動で最新形式 （v{SCHEMA_VERSION}
+                  ）に変換されます。学習データはそのまま保持され、不足している科目・志望校だけが追加されます。
+                </p>
+              ) : null}
+              {pending.summary.versionStatus === "newer" ? (
+                <p className="bg-destructive/15 text-destructive rounded-md px-2 py-1 text-xs">
+                  このファイルは新しいバージョン（v{pending.summary.schemaVersion}
+                  ）のアプリで作成されています。
+                  このまま取り込むと一部のデータが失われるため、取り込めません。アプリを更新してから取り込んでください。
                 </p>
               ) : null}
               <ul className="border-border grid grid-cols-2 gap-x-4 gap-y-1 rounded-lg border p-3 text-xs">
@@ -171,7 +184,10 @@ export function BackupPanel() {
             <Button variant="ghost" onClick={() => setPending(null)} disabled={busy}>
               キャンセル
             </Button>
-            <Button onClick={() => void confirmImport()} disabled={busy}>
+            <Button
+              onClick={() => void confirmImport()}
+              disabled={busy || pending?.summary.versionStatus === "newer"}
+            >
               置き換えて取り込む
             </Button>
           </DialogFooter>

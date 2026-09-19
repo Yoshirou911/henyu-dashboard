@@ -1,73 +1,54 @@
 "use client";
 
 import { CalendarClock } from "lucide-react";
+import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
 import { useRepository } from "@/components/providers/repository-provider";
 import { ReviewQueue } from "@/components/review/review-queue";
-import { WeaknessCard } from "@/components/weakness/weakness-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EmptyState } from "@/components/common/empty-state";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
+import { useStudyModel } from "@/hooks/use-study-model";
 import { REVIEW_OUTCOME_META } from "@/lib/constants";
-import { relativeDayLabel, shortDateLabel, startOfDay } from "@/lib/date";
-import { useCategories, useReviews, useSettings, useTopics } from "@/hooks/use-data";
+import { relativeDayLabel, shortDateLabel } from "@/lib/date";
 
 export function ReviewScreen() {
   const repo = useRepository();
-  const reviews = useReviews();
-  const topics = useTopics();
-  const categories = useCategories();
-  const settings = useSettings();
+  const model = useStudyModel();
 
-  const topicById = new Map((topics ?? []).map((t) => [t.id, t]));
-  const catById = new Map((categories ?? []).map((c) => [c.id, c]));
+  if (!model) {
+    return (
+      <div className="space-y-6">
+        <PageHeader title="復習" />
+        <Skeleton className="h-64 w-full rounded-xl" />
+      </div>
+    );
+  }
 
-  const upcoming = (reviews ?? [])
-    .filter((r) => !r.completedAt && r.dueAt >= startOfDay() + 1 && topicById.has(r.topicId))
-    .sort((a, b) => a.dueAt - b.dueAt)
-    .slice(0, 12);
-
-  const history = (reviews ?? [])
+  const history = model.snapshot.reviews
     .filter((r) => r.completedAt)
     .sort((a, b) => (b.completedAt ?? 0) - (a.completedAt ?? 0))
     .slice(0, 15);
+  const topicName = (id: string) => model.topicMetrics.get(id)?.topic.name ?? "（削除済み）";
 
   return (
     <div className="space-y-6">
       <PageHeader
         title="復習"
-        description="固定間隔（1・3・7・14・30日）で復習候補を提示します。"
+        description="基本OKになった日から 1・3・7・14・30日後。期限超過 → 習熟度 → 失敗回数 → 第一志望の重要度 → 前提単元 の順。"
       />
 
-      {settings ? (
-        <Card className="p-4">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <Label htmlFor="auto-lower" className="text-sm">
-                「できなかった」でステータスを自動的に下げる
-              </Label>
-              <p className="text-muted-foreground mt-0.5 text-xs">
-                オフの場合はステータスを維持し、最初の間隔でやり直します。
-              </p>
-            </div>
-            <Switch
-              id="auto-lower"
-              checked={settings.autoLowerStatusOnFailedReview}
-              onCheckedChange={(checked) =>
-                repo.updateSettings({ autoLowerStatusOnFailedReview: checked })
-              }
-            />
-          </div>
-        </Card>
-      ) : (
-        <Skeleton className="h-20 w-full rounded-xl" />
-      )}
-
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold">期限が来ている復習</h2>
-        <ReviewQueue />
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h2 className="text-sm font-semibold">今日の復習 {model.reviewQueue.length}件</h2>
+          {model.overdueCount > 0 ? (
+            <span className="text-destructive text-xs font-medium">
+              期限超過 {model.overdueCount}件
+            </span>
+          ) : null}
+        </div>
+        <ReviewQueue model={model} />
       </section>
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -79,32 +60,24 @@ export function ReviewScreen() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {reviews === undefined ? (
-              <Skeleton className="h-32 w-full" />
-            ) : upcoming.length === 0 ? (
+            {model.upcomingReviews.length === 0 ? (
               <EmptyState title="予定されている復習はありません" />
             ) : (
               <ul className="space-y-2">
-                {upcoming.map((r) => {
-                  const topic = topicById.get(r.topicId);
-                  if (!topic) return null;
-                  return (
-                    <li
-                      key={r.id}
-                      className="border-border flex items-center justify-between gap-2 rounded-lg border p-2.5 text-sm"
-                    >
-                      <div className="min-w-0">
-                        <p className="truncate font-medium">{topic.name}</p>
-                        <p className="text-muted-foreground truncate text-xs">
-                          {catById.get(topic.categoryId)?.name}
-                        </p>
-                      </div>
-                      <span className="text-muted-foreground shrink-0 text-xs tabular-nums">
-                        {shortDateLabel(r.dueAt)}
-                      </span>
-                    </li>
-                  );
-                })}
+                {model.upcomingReviews.slice(0, 12).map((item) => (
+                  <li
+                    key={item.review.id}
+                    className="border-border flex items-center justify-between gap-2 rounded-lg border p-2.5 text-sm"
+                  >
+                    <span className="min-w-0 truncate">
+                      <span className="text-muted-foreground">{item.metrics.subject.name} / </span>
+                      {item.metrics.topic.name}
+                    </span>
+                    <span className="text-muted-foreground shrink-0 text-xs tabular-nums">
+                      {shortDateLabel(item.review.dueAt)}
+                    </span>
+                  </li>
+                ))}
               </ul>
             )}
           </CardContent>
@@ -115,18 +88,15 @@ export function ReviewScreen() {
             <CardTitle>復習履歴</CardTitle>
           </CardHeader>
           <CardContent>
-            {reviews === undefined ? (
-              <Skeleton className="h-32 w-full" />
-            ) : history.length === 0 ? (
+            {history.length === 0 ? (
               <EmptyState title="まだ復習の記録はありません" />
             ) : (
               <ul className="space-y-2">
                 {history.map((r) => {
-                  const topic = topicById.get(r.topicId);
                   const meta = r.outcome ? REVIEW_OUTCOME_META[r.outcome] : null;
                   return (
                     <li key={r.id} className="flex items-center justify-between gap-2 text-sm">
-                      <span className="min-w-0 truncate">{topic?.name ?? "（削除済み）"}</span>
+                      <span className="min-w-0 truncate">{topicName(r.topicId)}</span>
                       <span className="flex shrink-0 items-center gap-2">
                         {meta ? (
                           <span
@@ -152,7 +122,25 @@ export function ReviewScreen() {
         </Card>
       </div>
 
-      <WeaknessCard limit={6} />
+      <Card className="p-4">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <Label htmlFor="auto-lower" className="text-sm">
+              「できなかった」でステータスを自動的に下げる
+            </Label>
+            <p className="text-muted-foreground mt-0.5 text-xs">
+              オフの場合はステータスを維持し、1日後からやり直します。
+            </p>
+          </div>
+          <Switch
+            id="auto-lower"
+            checked={model.settings.autoLowerStatusOnFailedReview}
+            onCheckedChange={(checked) =>
+              repo.updateSettings({ autoLowerStatusOnFailedReview: checked })
+            }
+          />
+        </div>
+      </Card>
     </div>
   );
 }

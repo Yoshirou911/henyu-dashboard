@@ -79,11 +79,11 @@ export function SetupScreen() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Sparkles className="text-primary size-4" />
-            数学ロードマップを作成しました
+            受験科目のロードマップを作成しました
           </CardTitle>
           <CardDescription>
-            {topics.length}{" "}
-            単元を「未学習」で登録しました。学習が進んだらステータスを更新していきます。
+            数学・物理・英語・TOEIC・C/C++・アルゴリズム・CS基礎・面接の {topics.length}{" "}
+            単元と、第一志望（電通大）を含む志望校10校を登録しました。
           </CardDescription>
         </CardHeader>
       </Card>

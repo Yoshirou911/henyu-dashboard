@@ -44,3 +44,8 @@ next-env.d.ts
 /public/sw.js
 /public/sw.js.map
 /public/swe-worker-*.js
+
+# personal study data — never commit exported backups
+henyu-backup-*.json
+*.backup.json
+/backups/

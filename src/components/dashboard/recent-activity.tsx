@@ -2,6 +2,8 @@
 
 import {
   CheckCircle2,
+  ClipboardCheck,
+  GraduationCap,
   FileText,
   Plus,
   Repeat,
@@ -26,6 +28,8 @@ const ICONS: Record<ActivityType, LucideIcon> = {
   exam_added: FileText,
   topic_added: Plus,
   seed: Sparkles,
+  exercise_logged: ClipboardCheck,
+  mock_added: GraduationCap,
 };
 
 function timeLabel(at: number) {

@@ -23,12 +23,12 @@ import {
   ChartTooltip,
 } from "@/components/analytics/chart-primitives";
 import {
-  categoryStudySplit,
   dailyStudyMinutes,
   progressTrend,
   weeklyStudyMinutes,
+  type SplitSlice,
 } from "@/lib/analytics";
-import type { ActivityLog, Category, ExamScore, StudySession, Topic } from "@/lib/types";
+import type { ActivityLog, StudySession, Topic } from "@/lib/types";
 import { formatMinutes } from "@/lib/utils";
 
 export function WeeklyHoursChart({ sessions }: { sessions: StudySession[] }) {
@@ -81,24 +81,18 @@ export function MonthlyHoursChart({ sessions }: { sessions: StudySession[] }) {
   );
 }
 
-export function CategorySplitChart({
-  sessions,
-  categories,
-  topics,
-  subjectId,
+export function SplitChart({
+  title,
+  description,
+  data: raw,
 }: {
-  sessions: StudySession[];
-  categories: Category[];
-  topics: Topic[];
-  subjectId: string;
+  title: string;
+  description: string;
+  data: SplitSlice[];
 }) {
-  const data = useMemo(
-    () => categoryStudySplit(sessions, categories, topics, subjectId).filter((s) => s.minutes > 0),
-    [sessions, categories, topics, subjectId],
-  );
-
+  const data = raw.filter((s) => s.minutes > 0);
   return (
-    <ChartFrame title="分野別学習時間" description="単元に紐づく学習時間の内訳">
+    <ChartFrame title={title} description={description}>
       {data.length > 0 ? (
         <div className="flex h-full flex-col gap-2 sm:flex-row sm:items-center">
           <ResponsiveContainer width="100%" height="100%" className="max-h-full sm:!w-1/2">
@@ -175,50 +169,6 @@ export function ProgressTrendChart({
           />
         </LineChart>
       </ResponsiveContainer>
-    </ChartFrame>
-  );
-}
-
-export function ExamScoreChart({ scores }: { scores: ExamScore[] }) {
-  const data = useMemo(
-    () =>
-      scores
-        .slice()
-        .sort((a, b) => a.year - b.year || a.date.localeCompare(b.date))
-        .map((s) => ({
-          label: `${s.examName.replace(/試験$/, "")}${s.year}`,
-          score: s.score,
-          max: s.maxScore,
-          percent: s.maxScore > 0 ? Math.round((s.score / s.maxScore) * 100) : 0,
-        })),
-    [scores],
-  );
-
-  return (
-    <ChartFrame title="過去問 得点推移" description="年度ごとの得点（満点に対する割合）">
-      {data.length > 0 ? (
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -16 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-            <XAxis dataKey="label" {...AXIS_PROPS} />
-            <YAxis {...AXIS_PROPS} width={44} domain={[0, 100]} unit="%" />
-            <Tooltip content={<ChartTooltip format={(v) => `${v}%`} />} />
-            <Line
-              type="monotone"
-              dataKey="percent"
-              name="得点率"
-              stroke="var(--chart-3)"
-              strokeWidth={2}
-              dot={{ r: 3, fill: "var(--chart-3)" }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      ) : (
-        <EmptyState
-          title="過去問の記録がまだありません"
-          description="下のフォームから追加できます。"
-        />
-      )}
     </ChartFrame>
   );
 }

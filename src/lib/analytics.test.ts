@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { dailyStudyMinutes, studyStreakDays, weaknessItems } from "@/lib/analytics";
+import { dailyStudyMinutes, studyStreakDays } from "@/lib/analytics";
 import { DAY_MS } from "@/lib/date";
-import type { Category, Review, StudySession, Topic } from "@/lib/types";
+import type { StudySession } from "@/lib/types";
 
 const NOW = new Date("2026-06-15T12:00:00");
 
@@ -44,71 +44,5 @@ describe("studyStreakDays", () => {
 
   it("is 0 with no sessions", () => {
     expect(studyStreakDays([], NOW)).toBe(0);
-  });
-});
-
-describe("weaknessItems", () => {
-  const category: Category = {
-    id: "c1",
-    subjectId: "s1",
-    name: "三角関数",
-    order: 0,
-    track: 0,
-    prerequisiteIds: [],
-    createdAt: 0,
-    updatedAt: 0,
-  };
-
-  function topic(id: string, extra: Partial<Topic> = {}): Topic {
-    return {
-      id,
-      categoryId: "c1",
-      name: id,
-      status: 2,
-      weight: 1,
-      order: 0,
-      createdAt: NOW.getTime(),
-      updatedAt: NOW.getTime(),
-      ...extra,
-    };
-  }
-
-  function review(topicId: string, outcome: Review["outcome"]): Review {
-    return {
-      id: `r-${topicId}-${outcome}`,
-      topicId,
-      dueAt: NOW.getTime(),
-      stage: 0,
-      completedAt: NOW.getTime(),
-      outcome,
-      createdAt: NOW.getTime(),
-    };
-  }
-
-  it("ranks topics with more failed reviews higher", () => {
-    const topics = [topic("weak"), topic("ok")];
-    const reviews = [review("weak", "failed"), review("weak", "failed"), review("ok", "got")];
-    const items = weaknessItems(topics, [category], reviews, { now: NOW.getTime() });
-    expect(items[0]?.topic.id).toBe("weak");
-    expect(items[0]?.reasons.join()).toContain("できなかった");
-  });
-
-  it("flags long-stalled topics", () => {
-    const stale = topic("stale", {
-      lastStatusUpAt: NOW.getTime() - 50 * DAY_MS,
-    });
-    const items = weaknessItems([stale], [category], [], { now: NOW.getTime() });
-    expect(items).toHaveLength(1);
-    expect(items[0]?.reasons.join()).toContain("停滞");
-  });
-
-  it("excludes 過去問レベル topics and clean topics", () => {
-    const items = weaknessItems(
-      [topic("mastered", { status: 4 }), topic("fine", { status: 2 })],
-      [category],
-      [],
-      { now: NOW.getTime() },
-    );
-    expect(items).toHaveLength(0);
   });
 });

@@ -1,15 +1,6 @@
-import { DONE_THRESHOLD } from "@/lib/constants";
 import { DAY_MS, dayKey, endOfDay, lastNDays, shortDateLabel, startOfDay } from "@/lib/date";
 import { weightedPercent } from "@/lib/progress";
-import type {
-  ActivityLog,
-  Category,
-  Review,
-  Status,
-  StudySession,
-  Topic,
-  WeaknessItem,
-} from "@/lib/types";
+import type { ActivityLog, Category, Status, StudySession, Topic } from "@/lib/types";
 import { roundTo } from "@/lib/utils";
 
 export interface DayBucket {
@@ -174,63 +165,6 @@ export function progressTrend(
   return points.reverse();
 }
 
-/** Heuristic weak-topic ranking (spec §13). Structure is ready for exam links. */
-export function weaknessItems(
-  topics: readonly Topic[],
-  categories: readonly Category[],
-  reviews: readonly Review[],
-  options: { now?: number; limit?: number } = {},
-): WeaknessItem[] {
-  const now = options.now ?? Date.now();
-  const limit = options.limit ?? 6;
-  const catName = new Map(categories.map((c) => [c.id, c.name]));
-
-  const failedByTopic = new Map<string, number>();
-  const shakyByTopic = new Map<string, number>();
-  for (const r of reviews) {
-    if (!r.completedAt || !r.outcome) continue;
-    if (r.outcome === "failed")
-      failedByTopic.set(r.topicId, (failedByTopic.get(r.topicId) ?? 0) + 1);
-    if (r.outcome === "shaky") shakyByTopic.set(r.topicId, (shakyByTopic.get(r.topicId) ?? 0) + 1);
-  }
-
-  const items: WeaknessItem[] = [];
-  for (const topic of topics) {
-    if (topic.status >= DONE_THRESHOLD + 1) continue; // 過去問レベルは対象外
-    const reasons: string[] = [];
-    let score = 0;
-
-    const failed = failedByTopic.get(topic.id) ?? 0;
-    if (failed > 0) {
-      score += failed * 3;
-      reasons.push(`復習で「できなかった」×${failed}`);
-    }
-    const shaky = shakyByTopic.get(topic.id) ?? 0;
-    if (shaky > 0) {
-      score += shaky;
-      reasons.push(`復習で「怪しい」×${shaky}`);
-    }
-
-    if (topic.status >= 1 && topic.status < 4) {
-      const since = topic.lastStatusUpAt ?? topic.createdAt;
-      const days = Math.floor((now - since) / DAY_MS);
-      if (days >= 45) {
-        score += 3;
-        reasons.push(`${days}日間ステータスが停滞`);
-      } else if (days >= 21) {
-        score += 2;
-        reasons.push(`${days}日間ステータスが停滞`);
-      }
-    }
-
-    if (score > 0) {
-      items.push({ topic, categoryName: catName.get(topic.categoryId) ?? "", score, reasons });
-    }
-  }
-
-  return items.sort((a, b) => b.score - a.score).slice(0, limit);
-}
-
 export function totalStudySeconds(sessions: readonly StudySession[]): number {
   return sessions.reduce((sum, s) => sum + s.durationSec, 0);
 }
@@ -250,4 +184,32 @@ export function studyStreakDays(sessions: readonly StudySession[], now: Date = n
     cursor -= DAY_MS;
   }
   return streak;
+}
+
+/** Study-time split across subjects (編入学習全体). */
+export function subjectStudySplit(
+  sessions: readonly StudySession[],
+  subjects: readonly { id: string; name: string }[],
+  subjectOf: (s: StudySession) => string | null,
+  sinceMs = 0,
+): SplitSlice[] {
+  const totals = new Map<string, number>();
+  for (const s of sessions) {
+    if (s.startedAt < sinceMs) continue;
+    const sid = subjectOf(s);
+    if (!sid) continue;
+    totals.set(sid, (totals.get(sid) ?? 0) + s.durationSec);
+  }
+  const grand = [...totals.values()].reduce((a, b) => a + b, 0);
+  return subjects
+    .map((subj) => {
+      const sec = totals.get(subj.id) ?? 0;
+      return {
+        id: subj.id,
+        name: subj.name,
+        minutes: roundTo(sec / 60, 0),
+        percent: grand > 0 ? roundTo((sec / grand) * 100, 1) : 0,
+      };
+    })
+    .sort((a, b) => b.minutes - a.minutes);
 }

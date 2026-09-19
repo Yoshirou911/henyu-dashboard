@@ -14,11 +14,24 @@ const REQUIRED_KEYS: (keyof BackupFile["data"])[] = [
   "activityLogs",
 ];
 
+const OPTIONAL_KEYS: (keyof BackupFile["data"])[] = [
+  "universities",
+  "universityRequirements",
+  "exerciseResults",
+  "monthlyGoals",
+  "milestones",
+  "mockExams",
+  "pastExams",
+  "pastExamProblems",
+];
+
 export interface BackupSummary {
   exportedAt: string;
   schemaVersion: number;
   counts: Record<string, number>;
   schemaMismatch: boolean;
+  /** older files are migrated on import; newer ones must not be imported (their extra data would be dropped) */
+  versionStatus: "same" | "older" | "newer";
 }
 
 export function parseBackup(text: string): { file: BackupFile; summary: BackupSummary } {
@@ -40,6 +53,13 @@ export function parseBackup(text: string): { file: BackupFile; summary: BackupSu
     if (!Array.isArray(arr)) throw new Error(`「${key}」が配列ではありません。`);
     counts[key] = arr.length;
   }
+  // v2 tables are optional so v1 backups still import (they are migrated afterwards)
+  for (const key of OPTIONAL_KEYS) {
+    const arr = (data as Record<string, unknown>)[key];
+    if (arr === undefined) continue;
+    if (!Array.isArray(arr)) throw new Error(`「${key}」が配列ではありません。`);
+    counts[key] = arr.length;
+  }
 
   const schemaVersion = typeof json.schemaVersion === "number" ? json.schemaVersion : 0;
 
@@ -50,6 +70,12 @@ export function parseBackup(text: string): { file: BackupFile; summary: BackupSu
       schemaVersion,
       counts,
       schemaMismatch: schemaVersion !== SCHEMA_VERSION,
+      versionStatus:
+        schemaVersion === SCHEMA_VERSION
+          ? "same"
+          : schemaVersion < SCHEMA_VERSION
+            ? "older"
+            : "newer",
     },
   };
 }

@@ -50,11 +50,6 @@ export function useDailyGoals(sinceDate?: string) {
   return useLive(() => repo.listDailyGoals(sinceDate), [sinceDate]);
 }
 
-export function useExamScores() {
-  const repo = useRepository();
-  return useLive(() => repo.listExamScores(), []);
-}
-
 export function useActivity(limit = 40) {
   const repo = useRepository();
   return useLive(() => repo.listActivity(limit), [limit]);

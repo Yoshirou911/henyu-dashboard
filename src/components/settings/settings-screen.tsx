@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PageHeader } from "@/components/common/page-header";
 import { useRepository } from "@/components/providers/repository-provider";
 import { BackupPanel } from "@/components/backup/backup-panel";
+import { AllocationSettings, SubjectManager } from "@/components/settings/subject-settings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,21 +14,36 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/toaster";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSettings, useSubjects } from "@/hooks/use-data";
+import { useStudyModel } from "@/hooks/use-study-model";
 import { daysUntil } from "@/lib/date";
 import type { Settings, Subject } from "@/lib/types";
 
 export function SettingsScreen() {
   const settings = useSettings();
   const subjects = useSubjects();
+  const model = useStudyModel();
 
   return (
     <div className="space-y-6">
       <PageHeader title="設定" />
       {settings ? (
-        <SettingsForm key="ready" settings={settings} subjects={subjects ?? []} />
+        <SettingsForm
+          key="ready"
+          settings={settings}
+          subjects={(subjects ?? []).filter((s) => !s.archived)}
+        />
       ) : (
         <Skeleton className="h-64 w-full rounded-xl" />
       )}
+      {model ? (
+        <>
+          <AllocationSettings
+            key={JSON.stringify(model.settings.subjectAllocation ?? {})}
+            model={model}
+          />
+          <SubjectManager model={model} />
+        </>
+      ) : null}
       <BackupPanel />
     </div>
   );
@@ -48,6 +64,10 @@ function SettingsForm({ settings, subjects }: { settings: Settings; subjects: Su
       dailyStudyGoalMin: Math.max(0, Number.parseInt(dailyGoal, 10) || 0),
       weeklyStudyGoalMin: Math.max(0, Number.parseInt(weeklyGoal, 10) || 0),
     });
+    // the countdown follows the 第一志望; keep both in step
+    if (settings.primaryUniversityId && examDate && examDate !== settings.examDate) {
+      await repo.updateUniversity(settings.primaryUniversityId, { examDate });
+    }
     setDirty(false);
     toast({ title: "設定を保存しました", variant: "success" });
   }
@@ -58,7 +78,7 @@ function SettingsForm({ settings, subjects }: { settings: Settings; subjects: Su
     <>
       <Card>
         <CardHeader>
-          <CardTitle>試験</CardTitle>
+          <CardTitle>第一志望の試験</CardTitle>
           <CardDescription>正式日程が発表されたら試験日を更新してください。</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -128,18 +148,18 @@ function SettingsForm({ settings, subjects }: { settings: Settings; subjects: Su
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>学習の対象</CardTitle>
-          <CardDescription>ダッシュボードで中心に表示する教科です。</CardDescription>
+          <CardTitle>表示と復習</CardTitle>
+          <CardDescription>ロードマップで最初に開く科目と、復習の扱い。</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="s-primary">メイン教科</Label>
+            <Label htmlFor="s-primary">既定の科目</Label>
             <Select
               id="s-primary"
               value={settings.primarySubjectId ?? ""}
               onValueChange={(v) => repo.updateSettings({ primarySubjectId: v })}
               items={subjects.map((s) => ({ value: s.id, label: s.name }))}
-              aria-label="メイン教科"
+              aria-label="既定の科目"
               className="max-w-xs"
             />
           </div>

@@ -10,23 +10,34 @@ import { CategorySection } from "@/components/roadmap/category-section";
 import { RoadmapFlow } from "@/components/roadmap/roadmap-flow";
 import { TopicDetailDialog } from "@/components/roadmap/topic-detail-dialog";
 import { Button } from "@/components/ui/button";
+import { ChipGroup } from "@/components/ui/chip-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toaster";
 import { useCategories, usePrimarySubject, useSubjectProgress, useTopics } from "@/hooks/use-data";
+import { useStudyModel } from "@/hooks/use-study-model";
 
 export function RoadmapScreen() {
   const repo = useRepository();
-  const subject = usePrimarySubject();
-  const progress = useSubjectProgress(subject?.id);
-  const categories = useCategories(subject?.id);
-  const topics = useTopics();
+  const model = useStudyModel();
+  const primary = usePrimarySubject();
   const searchParams = useSearchParams();
 
   // `undefined` = follow the ?topic= URL param; anything else = user override
   const [override, setOverride] = useState<string | null | undefined>(undefined);
+  const [subjectPick, setSubjectPick] = useState<string | null>(null);
   const [addCatOpen, setAddCatOpen] = useState(false);
 
   const selectedTopic = override === undefined ? searchParams.get("topic") : override;
+  const paramTopic = searchParams.get("topic");
+  const subjectId =
+    subjectPick ??
+    searchParams.get("subject") ??
+    (paramTopic ? model?.topicMetrics.get(paramTopic)?.subject.id : undefined) ??
+    primary?.id;
+  const subject = model?.subjects.find((s) => s.id === subjectId) ?? primary;
+  const progress = useSubjectProgress(subject?.id);
+  const categories = useCategories(subject?.id);
+  const topics = useTopics();
 
   const orderedCategories = useMemo(
     () => (categories ?? []).slice().sort((a, b) => a.order - b.order),
@@ -36,6 +47,7 @@ export function RoadmapScreen() {
   const topicsByCategory = useMemo(() => {
     const map = new Map<string, typeof topics>();
     for (const t of topics ?? []) {
+      if (t.archived) continue;
       const arr = map.get(t.categoryId) ?? [];
       arr.push(t);
       map.set(t.categoryId, arr);
@@ -66,6 +78,15 @@ export function RoadmapScreen() {
           </Button>
         }
       />
+
+      {model && model.subjects.length > 1 ? (
+        <ChipGroup
+          aria-label="科目"
+          value={subject?.id ?? ""}
+          onChange={(v) => setSubjectPick(v)}
+          options={model.subjects.map((s) => ({ value: s.id, label: s.name }))}
+        />
+      ) : null}
 
       {loading ? (
         <div className="space-y-3">

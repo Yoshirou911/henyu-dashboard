@@ -1,58 +1,59 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
-import { PageHeader } from "@/components/common/page-header";
-import { StatCard } from "@/components/common/stat-card";
+import { useMemo, useState } from "react";
 import {
-  CategorySplitChart,
-  ExamScoreChart,
   MonthlyHoursChart,
   ProgressTrendChart,
+  SplitChart,
   WeeklyHoursChart,
 } from "@/components/analytics/charts";
-import { ExamScoresPanel } from "@/components/analytics/exam-scores-panel";
+import { PageHeader } from "@/components/common/page-header";
+import { StatCard } from "@/components/common/stat-card";
+import { ChipGroup } from "@/components/ui/chip-group";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  useActivity,
-  useCategories,
-  useExamScores,
-  usePrimarySubject,
-  useStudySessions,
-  useTopics,
-} from "@/hooks/use-data";
-import { totalStudySeconds, weeklyStudyMinutes } from "@/lib/analytics";
+import { useActivity } from "@/hooks/use-data";
+import { useStudyModel } from "@/hooks/use-study-model";
+import { categoryStudySplit, subjectStudySplit, totalStudySeconds } from "@/lib/analytics";
+import { DAY_MS, startOfDay } from "@/lib/date";
 import { formatMinutes } from "@/lib/utils";
 
 export function AnalyticsScreen() {
-  const subject = usePrimarySubject();
-  const sessions = useStudySessions();
-  const categories = useCategories();
-  const topics = useTopics();
-  const scores = useExamScores();
-  const activity = useActivity(1000);
-  const searchParams = useSearchParams();
+  const model = useStudyModel();
+  const activity = useActivity(2000);
+  const [subjectId, setSubjectId] = useState<string | null>(null);
 
-  const subjectTopics = useMemo(() => {
-    if (!subject || !categories || !topics) return [];
-    const catIds = new Set(categories.filter((c) => c.subjectId === subject.id).map((c) => c.id));
-    return topics.filter((t) => catIds.has(t.categoryId));
-  }, [subject, categories, topics]);
+  const selected = subjectId ?? model?.settings.primarySubjectId ?? model?.subjects[0]?.id ?? "";
 
-  const loading =
-    !subject ||
-    sessions === undefined ||
-    categories === undefined ||
-    topics === undefined ||
-    activity === undefined;
+  const derived = useMemo(() => {
+    if (!model) return null;
+    const { snapshot } = model;
+    const topicSubject = (topicId: string | null) =>
+      topicId ? (model.topicMetrics.get(topicId)?.subject.id ?? null) : null;
+    const subjectTopics = [...model.topicMetrics.values()]
+      .filter((m) => m.subject.id === selected)
+      .map((m) => m.topic);
+    return {
+      subjectSplit: subjectStudySplit(
+        snapshot.sessions,
+        model.subjects,
+        (s) => s.subjectId ?? topicSubject(s.topicId),
+        startOfDay(model.now) - 29 * DAY_MS,
+      ),
+      categorySplit: categoryStudySplit(
+        snapshot.sessions,
+        snapshot.categories,
+        snapshot.topics,
+        selected,
+      ),
+      subjectTopics,
+    };
+  }, [model, selected]);
 
-  if (loading) {
+  if (!model || !derived || activity === undefined) {
     return (
       <div className="space-y-6">
         <PageHeader title="Analytics" />
         <div className="grid gap-6 md:grid-cols-2">
-          <Skeleton className="h-72 rounded-xl" />
-          <Skeleton className="h-72 rounded-xl" />
           <Skeleton className="h-72 rounded-xl" />
           <Skeleton className="h-72 rounded-xl" />
         </div>
@@ -60,32 +61,46 @@ export function AnalyticsScreen() {
     );
   }
 
-  const totalSec = totalStudySeconds(sessions);
-  const thisWeekMin = weeklyStudyMinutes(sessions, 1)[0]?.minutes ?? 0;
+  const sessions = model.snapshot.sessions;
+  const subjectName = model.subjectById.get(selected)?.name ?? "";
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Analytics" description={`${subject.name}の学習データ`} />
+      <PageHeader title="Analytics" description="学習時間・配分・進捗の推移" />
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <StatCard label="累計学習時間" value={formatMinutes(totalSec / 60)} />
-        <StatCard label="今週の学習時間" value={formatMinutes(thisWeekMin)} />
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <StatCard label="累計学習時間" value={formatMinutes(totalStudySeconds(sessions) / 60)} />
+        <StatCard label="直近7日" value={formatMinutes(model.weekMinutes)} />
+        <StatCard label="今日" value={formatMinutes(model.todayMinutes)} />
+        <StatCard label="連続学習" value={`${model.streak}日`} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <WeeklyHoursChart sessions={sessions} />
         <MonthlyHoursChart sessions={sessions} />
-        <CategorySplitChart
-          sessions={sessions}
-          categories={categories}
-          topics={topics}
-          subjectId={subject.id}
+        <SplitChart
+          title="科目別学習時間"
+          description="直近30日・編入学習全体"
+          data={derived.subjectSplit}
         />
-        <ProgressTrendChart subjectTopics={subjectTopics} activityLogs={activity} />
       </div>
 
-      <ExamScoreChart scores={scores ?? []} />
-      <ExamScoresPanel defaultOpen={searchParams.get("add") === "exam"} />
+      <div className="space-y-3">
+        <ChipGroup
+          aria-label="科目"
+          value={selected}
+          onChange={setSubjectId}
+          options={model.subjects.map((s) => ({ value: s.id, label: s.name }))}
+        />
+        <div className="grid gap-6 md:grid-cols-2">
+          <SplitChart
+            title={`${subjectName}：分野別学習時間`}
+            description="単元に紐づく学習時間の内訳"
+            data={derived.categorySplit}
+          />
+          <ProgressTrendChart subjectTopics={derived.subjectTopics} activityLogs={activity} />
+        </div>
+      </div>
     </div>
   );
 }

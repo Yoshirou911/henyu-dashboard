@@ -181,7 +181,7 @@ export function CategorySection({
         open={confirmDelete}
         onOpenChange={setConfirmDelete}
         title="分野を削除しますか？"
-        description={`「${category.name}」と、含まれる ${topics.length} 単元・その復習予定が削除されます。取り消せません。`}
+        description={`「${category.name}」と、含まれる ${topics.length} 単元、その問題演習の記録・復習予定が削除されます（学習時間の記録は残ります）。取り消せません。`}
         placeholder={`確認のため「${category.name}」と入力`}
         onSubmit={async (value) => {
           if (value !== category.name) {

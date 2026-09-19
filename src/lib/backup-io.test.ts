@@ -46,6 +46,14 @@ describe("parseBackup", () => {
     expect(() => parseBackup(JSON.stringify(broken))).toThrow(/topics/);
   });
 
+  it("classifies the file version relative to the app", () => {
+    const at = (v: number) =>
+      parseBackup(JSON.stringify({ ...validBackup(), schemaVersion: v })).summary.versionStatus;
+    expect(at(SCHEMA_VERSION)).toBe("same");
+    expect(at(1)).toBe(SCHEMA_VERSION > 1 ? "older" : "same");
+    expect(at(SCHEMA_VERSION + 1)).toBe("newer");
+  });
+
   it("flags a schema version mismatch without throwing", () => {
     const older = { ...validBackup(), schemaVersion: SCHEMA_VERSION + 1 };
     const { summary } = parseBackup(JSON.stringify(older));

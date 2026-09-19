@@ -5,10 +5,11 @@ import { ArrowRight, CalendarCheck, Download, FileText, Play, Search, Square } f
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRepository } from "@/components/providers/repository-provider";
+import { useRecorder } from "@/components/record/record-provider";
 import { NavIcon } from "@/components/layout/nav-icon";
 import { StatusDot } from "@/components/topic/status-badge";
 import { toast } from "@/components/ui/toaster";
-import { usePrimarySubject, useOrderedSubjectTopics } from "@/hooks/use-data";
+import { useStudyModel } from "@/hooks/use-study-model";
 import { useTimer } from "@/hooks/use-timer";
 import { NAV_ITEMS } from "@/lib/constants";
 import { downloadBackup } from "@/lib/backup-io";
@@ -76,8 +77,9 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const repo = useRepository();
   const timer = useTimer();
-  const subject = usePrimarySubject();
-  const topicViews = useOrderedSubjectTopics(subject?.id);
+  const { openRecord } = useRecorder();
+  const model = useStudyModel();
+  const topicViews = useMemo(() => (model ? [...model.topicMetrics.values()] : undefined), [model]);
 
   const go = useCallback(
     (href: string) => {
@@ -105,6 +107,17 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
         run: () => go("/today"),
       },
       {
+        id: "action:record",
+        group: "アクション",
+        label: "問題演習を記録",
+        keywords: "記録 正答率 問題",
+        icon: <FileText className="size-4" />,
+        run: () => {
+          onClose();
+          openRecord({ mode: "exercise" });
+        },
+      },
+      {
         id: "action:timer-toggle",
         group: "アクション",
         label: timer.running ? "タイマーを一時停止" : "タイマーを開始",
@@ -128,9 +141,9 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
       {
         id: "action:exam",
         group: "アクション",
-        label: "過去問の得点を追加",
+        label: "過去問・模試を記録",
         icon: <FileText className="size-4" />,
-        run: () => go("/analytics?add=exam"),
+        run: () => go("/exams"),
       },
       {
         id: "action:export",
@@ -151,14 +164,14 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
         id: `topic:${v.topic.id}`,
         group: "単元へ移動",
         label: v.topic.name,
-        hint: v.category.name,
-        keywords: `${v.category.name} ${v.topic.name}`,
+        hint: `${v.subject.name} / ${v.category.name}`,
+        keywords: `${v.subject.name} ${v.category.name} ${v.topic.name}`,
         icon: <StatusDot status={v.topic.status} />,
         run: () => go(`/roadmap?topic=${v.topic.id}`),
       });
     }
     return base;
-  }, [go, onClose, repo, timer, topicViews]);
+  }, [go, onClose, openRecord, repo, timer, topicViews]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

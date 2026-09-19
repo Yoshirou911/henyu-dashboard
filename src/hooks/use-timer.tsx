@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { useRepository } from "@/components/providers/repository-provider";
+import { useRecorder } from "@/components/record/record-provider";
 import { toast } from "@/components/ui/toaster";
 import type { ID } from "@/lib/types";
 
@@ -22,6 +23,8 @@ interface TimerTarget {
   topicId: ID | null;
   topicName: string | null;
   subjectId: ID | null;
+  /** minutes planned by the today planner (shown when recording) */
+  plannedMinutes?: number | null;
 }
 
 interface PersistedTimer extends TimerTarget {
@@ -35,6 +38,7 @@ const EMPTY: PersistedTimer = {
   topicId: null,
   topicName: null,
   subjectId: null,
+  plannedMinutes: null,
   firstStartedAt: null,
   lastResumedAt: null,
   accumulatedSec: 0,
@@ -52,8 +56,10 @@ interface TimerContextValue {
   pause: () => void;
   resume: () => void;
   reset: () => void;
-  /** finalize: persist a StudySession (when long enough) and clear */
+  /** finalize silently: persist a StudySession (when long enough) and clear */
   stop: () => Promise<void>;
+  /** pause and open the record dialog (time + optional problem results) */
+  finish: () => void;
 }
 
 const TimerContext = createContext<TimerContextValue | null>(null);
@@ -77,6 +83,7 @@ function computeElapsed(state: PersistedTimer, now: number): number {
 
 export function TimerProvider({ children }: { children: ReactNode }) {
   const repo = useRepository();
+  const { openRecord } = useRecorder();
   // Safe: the whole tree under RepositoryProvider mounts only after an async
   // init resolves (post-hydration), so reading storage here can't mismatch SSR.
   const [state, setState] = useState<PersistedTimer>(() => readStored());
@@ -165,6 +172,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
           endedAt,
           durationSec: elapsed,
           source: "timer",
+          plannedMinutes: snapshot.plannedMinutes ?? undefined,
         });
         toast({
           title: "学習を記録しました",
@@ -177,6 +185,29 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     reset();
   }, [repo, reset]);
 
+  const finish = useCallback(() => {
+    const endedAt = Date.now();
+    const snapshot = stateRef.current;
+    const elapsed = computeElapsed(snapshot, endedAt);
+    pause();
+    if (elapsed < MIN_LOGGABLE_SEC) {
+      toast({ title: "計測が短いため記録しませんでした" });
+      reset();
+      return;
+    }
+    openRecord({
+      mode: "session",
+      topicId: snapshot.topicId,
+      subjectId: snapshot.subjectId,
+      minutes: Math.max(1, Math.round(elapsed / 60)),
+      plannedMinutes: snapshot.plannedMinutes ?? undefined,
+      startedAt: snapshot.firstStartedAt ?? endedAt - elapsed * 1000,
+      endedAt,
+      source: "timer",
+      onSaved: reset,
+    });
+  }, [openRecord, pause, reset]);
+
   const elapsedSec = computeElapsed(state, now);
 
   const value = useMemo<TimerContextValue>(
@@ -185,6 +216,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         topicId: state.topicId,
         topicName: state.topicName,
         subjectId: state.subjectId,
+        plannedMinutes: state.plannedMinutes,
       },
       running: state.running,
       elapsedSec,
@@ -195,8 +227,9 @@ export function TimerProvider({ children }: { children: ReactNode }) {
       resume,
       reset,
       stop,
+      finish,
     }),
-    [state, elapsedSec, setTarget, start, pause, resume, reset, stop],
+    [state, elapsedSec, setTarget, start, pause, resume, reset, stop, finish],
   );
 
   return <TimerContext.Provider value={value}>{children}</TimerContext.Provider>;

@@ -1,0 +1,3062 @@
+{
+  "format": "henyu-dashboard-backup",
+  "schemaVersion": 1,
+  "exportedAt": "2026-09-14T22:00:00.000Z",
+  "data": {
+    "subjects": [
+      {
+        "id": "subj_math",
+        "slug": "math",
+        "name": "数学",
+        "color": "chart-1",
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      }
+    ],
+    "categories": [
+      {
+        "id": "cat_7f363d68-396c-45af-93b7-ef730015114f",
+        "subjectId": "subj_math",
+        "name": "確率統計",
+        "order": 7,
+        "track": 0,
+        "prerequisiteIds": [],
+        "createdAt": 1787320800000,
+        "updatedAt": 1787320800000
+      },
+      {
+        "id": "cat_math_diff-1v",
+        "subjectId": "subj_math",
+        "name": "一変数微分",
+        "order": 2,
+        "track": 0,
+        "prerequisiteIds": [
+          "cat_math_limits"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_hs-remedial",
+        "subjectId": "subj_math",
+        "name": "高校数学補修",
+        "order": 0,
+        "track": 0,
+        "prerequisiteIds": [],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_int-1v",
+        "subjectId": "subj_math",
+        "name": "一変数積分",
+        "order": 3,
+        "track": 0,
+        "prerequisiteIds": [
+          "cat_math_diff-1v"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_limits",
+        "subjectId": "subj_math",
+        "name": "極限",
+        "order": 1,
+        "track": 0,
+        "prerequisiteIds": [
+          "cat_math_hs-remedial"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_linalg",
+        "subjectId": "subj_math",
+        "name": "線形代数",
+        "order": 6,
+        "track": 1,
+        "prerequisiteIds": [
+          "cat_math_hs-remedial"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_multivar",
+        "subjectId": "subj_math",
+        "name": "多変数微積分",
+        "order": 4,
+        "track": 0,
+        "prerequisiteIds": [
+          "cat_math_int-1v"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "cat_math_ode",
+        "subjectId": "subj_math",
+        "name": "微分方程式",
+        "order": 5,
+        "track": 0,
+        "prerequisiteIds": [
+          "cat_math_multivar"
+        ],
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      }
+    ],
+    "topics": [
+      {
+        "id": "topic_06c8c45d-5329-455b-929e-572e31a284ee",
+        "categoryId": "cat_7f363d68-396c-45af-93b7-ef730015114f",
+        "name": "確率の基本",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1787320800000,
+        "updatedAt": 1787320800000
+      },
+      {
+        "id": "topic_28862de1-56d8-4ba0-a61a-6bb73a1e35df",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "絶対値",
+        "status": 0,
+        "weight": 1,
+        "order": 20,
+        "createdAt": 1787320800000,
+        "updatedAt": 1787320800000
+      },
+      {
+        "id": "topic_58179be7-5e2e-4ae5-980f-36eed2a5b2e7",
+        "categoryId": "cat_7f363d68-396c-45af-93b7-ef730015114f",
+        "name": "期待値",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1787320800000,
+        "updatedAt": 1787320800000
+      },
+      {
+        "id": "topic_math_diff-1v_0",
+        "categoryId": "cat_math_diff-1v",
+        "name": "微分係数",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_1",
+        "categoryId": "cat_math_diff-1v",
+        "name": "導関数",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_10",
+        "categoryId": "cat_math_diff-1v",
+        "name": "接線",
+        "status": 0,
+        "weight": 1,
+        "order": 10,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_11",
+        "categoryId": "cat_math_diff-1v",
+        "name": "増減",
+        "status": 0,
+        "weight": 1,
+        "order": 11,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_12",
+        "categoryId": "cat_math_diff-1v",
+        "name": "極値",
+        "status": 0,
+        "weight": 1,
+        "order": 12,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_13",
+        "categoryId": "cat_math_diff-1v",
+        "name": "最大値・最小値",
+        "status": 0,
+        "weight": 1,
+        "order": 13,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_2",
+        "categoryId": "cat_math_diff-1v",
+        "name": "基本的な微分",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_3",
+        "categoryId": "cat_math_diff-1v",
+        "name": "積の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_4",
+        "categoryId": "cat_math_diff-1v",
+        "name": "商の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_5",
+        "categoryId": "cat_math_diff-1v",
+        "name": "合成関数の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_6",
+        "categoryId": "cat_math_diff-1v",
+        "name": "三角関数の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_7",
+        "categoryId": "cat_math_diff-1v",
+        "name": "指数関数の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 7,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_8",
+        "categoryId": "cat_math_diff-1v",
+        "name": "対数関数の微分",
+        "status": 0,
+        "weight": 1,
+        "order": 8,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_diff-1v_9",
+        "categoryId": "cat_math_diff-1v",
+        "name": "高階導関数",
+        "status": 0,
+        "weight": 1,
+        "order": 9,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_0",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "展開",
+        "status": 3,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786708800000,
+        "lastStatusUpAt": 1786708800000,
+        "basicOkAt": 1786359600000,
+        "lastStudiedAt": 1786708800000
+      },
+      {
+        "id": "topic_math_hs-remedial_1",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "因数分解",
+        "status": 3,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787140800000,
+        "lastStatusUpAt": 1787140800000,
+        "basicOkAt": 1786359600000,
+        "lastStudiedAt": 1787140800000
+      },
+      {
+        "id": "topic_math_hs-remedial_10",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "グラフの平行移動",
+        "status": 1,
+        "weight": 1,
+        "order": 10,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787320800000,
+        "lastStudiedAt": 1788696000000,
+        "lastStatusUpAt": 1788696000000
+      },
+      {
+        "id": "topic_math_hs-remedial_11",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "指数法則",
+        "status": 2,
+        "weight": 1,
+        "order": 11,
+        "createdAt": 1786356000000,
+        "updatedAt": 1789128000000,
+        "lastStudiedAt": 1789128000000,
+        "lastStatusUpAt": 1789128000000,
+        "basicOkAt": 1789128000000
+      },
+      {
+        "id": "topic_math_hs-remedial_12",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "指数関数",
+        "status": 1,
+        "weight": 1,
+        "order": 12,
+        "createdAt": 1786356000000,
+        "updatedAt": 1789214400000,
+        "lastStudiedAt": 1789214400000,
+        "lastStatusUpAt": 1789214400000
+      },
+      {
+        "id": "topic_math_hs-remedial_13",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "対数",
+        "status": 0,
+        "weight": 1,
+        "order": 13,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_14",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "対数関数",
+        "status": 0,
+        "weight": 1,
+        "order": 14,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_15",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "三角比",
+        "status": 0,
+        "weight": 1,
+        "order": 15,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_16",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "弧度法",
+        "status": 0,
+        "weight": 1,
+        "order": 16,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_17",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "三角関数",
+        "status": 0,
+        "weight": 1,
+        "order": 17,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_18",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "三角関数の基本公式",
+        "status": 0,
+        "weight": 1,
+        "order": 18,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_19",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "三角関数のグラフ",
+        "status": 0,
+        "weight": 1,
+        "order": 19,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_hs-remedial_2",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "方程式",
+        "status": 2,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786536000000,
+        "lastStudiedAt": 1786536000000,
+        "lastStatusUpAt": 1786536000000,
+        "basicOkAt": 1786536000000
+      },
+      {
+        "id": "topic_math_hs-remedial_3",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "不等式",
+        "status": 2,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786795200000,
+        "lastStudiedAt": 1786795200000,
+        "lastStatusUpAt": 1786795200000,
+        "basicOkAt": 1786795200000
+      },
+      {
+        "id": "topic_math_hs-remedial_4",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "分数式",
+        "status": 2,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787320800000,
+        "lastStudiedAt": 1789387200000,
+        "lastStatusUpAt": 1789387200000,
+        "basicOkAt": 1789387200000,
+        "note": "通分でミスしやすい"
+      },
+      {
+        "id": "topic_math_hs-remedial_5",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "平方根・指数の基本",
+        "status": 1,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1788080400000,
+        "lastStudiedAt": 1787400000000,
+        "lastStatusUpAt": 1787400000000,
+        "basicOkAt": 1787400000000
+      },
+      {
+        "id": "topic_math_hs-remedial_6",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "関数とは何か",
+        "status": 2,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787659200000,
+        "lastStudiedAt": 1787659200000,
+        "lastStatusUpAt": 1787659200000,
+        "basicOkAt": 1787659200000
+      },
+      {
+        "id": "topic_math_hs-remedial_7",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "一次関数",
+        "status": 2,
+        "weight": 1,
+        "order": 7,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787832000000,
+        "lastStudiedAt": 1787832000000,
+        "lastStatusUpAt": 1787832000000,
+        "basicOkAt": 1787832000000
+      },
+      {
+        "id": "topic_math_hs-remedial_8",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "二次関数",
+        "status": 2,
+        "weight": 1,
+        "order": 8,
+        "createdAt": 1786356000000,
+        "updatedAt": 1788436800000,
+        "lastStudiedAt": 1788436800000,
+        "lastStatusUpAt": 1788436800000,
+        "basicOkAt": 1788436800000
+      },
+      {
+        "id": "topic_math_hs-remedial_9",
+        "categoryId": "cat_math_hs-remedial",
+        "name": "定義域・値域",
+        "status": 1,
+        "weight": 1,
+        "order": 9,
+        "createdAt": 1786356000000,
+        "updatedAt": 1788264000000,
+        "lastStudiedAt": 1788264000000,
+        "lastStatusUpAt": 1788264000000
+      },
+      {
+        "id": "topic_math_int-1v_0",
+        "categoryId": "cat_math_int-1v",
+        "name": "原始関数",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_1",
+        "categoryId": "cat_math_int-1v",
+        "name": "不定積分",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_10",
+        "categoryId": "cat_math_int-1v",
+        "name": "広義積分",
+        "status": 0,
+        "weight": 1,
+        "order": 10,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_2",
+        "categoryId": "cat_math_int-1v",
+        "name": "定積分",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_3",
+        "categoryId": "cat_math_int-1v",
+        "name": "微積分の基本定理",
+        "status": 0,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_4",
+        "categoryId": "cat_math_int-1v",
+        "name": "置換積分",
+        "status": 0,
+        "weight": 3,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1787320800000
+      },
+      {
+        "id": "topic_math_int-1v_5",
+        "categoryId": "cat_math_int-1v",
+        "name": "部分積分",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_6",
+        "categoryId": "cat_math_int-1v",
+        "name": "有理関数の積分",
+        "status": 0,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_7",
+        "categoryId": "cat_math_int-1v",
+        "name": "三角関数を含む積分",
+        "status": 0,
+        "weight": 1,
+        "order": 7,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_8",
+        "categoryId": "cat_math_int-1v",
+        "name": "面積",
+        "status": 0,
+        "weight": 1,
+        "order": 8,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_int-1v_9",
+        "categoryId": "cat_math_int-1v",
+        "name": "体積",
+        "status": 0,
+        "weight": 1,
+        "order": 9,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_0",
+        "categoryId": "cat_math_limits",
+        "name": "数列の極限",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_1",
+        "categoryId": "cat_math_limits",
+        "name": "関数の極限",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_2",
+        "categoryId": "cat_math_limits",
+        "name": "無限大",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_3",
+        "categoryId": "cat_math_limits",
+        "name": "不定形",
+        "status": 0,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_4",
+        "categoryId": "cat_math_limits",
+        "name": "基本的な極限計算",
+        "status": 0,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_limits_5",
+        "categoryId": "cat_math_limits",
+        "name": "微分につながる極限",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_0",
+        "categoryId": "cat_math_linalg",
+        "name": "ベクトル",
+        "status": 2,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1788609600000,
+        "lastStudiedAt": 1788609600000,
+        "lastStatusUpAt": 1788609600000,
+        "basicOkAt": 1788609600000
+      },
+      {
+        "id": "topic_math_linalg_1",
+        "categoryId": "cat_math_linalg",
+        "name": "ベクトルの演算",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_10",
+        "categoryId": "cat_math_linalg",
+        "name": "線形独立・線形従属",
+        "status": 0,
+        "weight": 1,
+        "order": 10,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_11",
+        "categoryId": "cat_math_linalg",
+        "name": "ベクトル空間",
+        "status": 0,
+        "weight": 1,
+        "order": 11,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_12",
+        "categoryId": "cat_math_linalg",
+        "name": "部分空間",
+        "status": 0,
+        "weight": 1,
+        "order": 12,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_13",
+        "categoryId": "cat_math_linalg",
+        "name": "基底",
+        "status": 0,
+        "weight": 1,
+        "order": 13,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_14",
+        "categoryId": "cat_math_linalg",
+        "name": "次元",
+        "status": 0,
+        "weight": 1,
+        "order": 14,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_15",
+        "categoryId": "cat_math_linalg",
+        "name": "線形写像",
+        "status": 0,
+        "weight": 1,
+        "order": 15,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_16",
+        "categoryId": "cat_math_linalg",
+        "name": "表現行列",
+        "status": 0,
+        "weight": 1,
+        "order": 16,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_17",
+        "categoryId": "cat_math_linalg",
+        "name": "固有値",
+        "status": 0,
+        "weight": 1,
+        "order": 17,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_18",
+        "categoryId": "cat_math_linalg",
+        "name": "固有ベクトル",
+        "status": 0,
+        "weight": 1,
+        "order": 18,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_19",
+        "categoryId": "cat_math_linalg",
+        "name": "固有空間",
+        "status": 0,
+        "weight": 1,
+        "order": 19,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_2",
+        "categoryId": "cat_math_linalg",
+        "name": "内積",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_20",
+        "categoryId": "cat_math_linalg",
+        "name": "対角化",
+        "status": 0,
+        "weight": 1,
+        "order": 20,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_21",
+        "categoryId": "cat_math_linalg",
+        "name": "直交化",
+        "status": 0,
+        "weight": 1,
+        "order": 21,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_3",
+        "categoryId": "cat_math_linalg",
+        "name": "行列",
+        "status": 1,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1788955200000,
+        "lastStudiedAt": 1788955200000,
+        "lastStatusUpAt": 1788955200000
+      },
+      {
+        "id": "topic_math_linalg_4",
+        "categoryId": "cat_math_linalg",
+        "name": "行列の演算",
+        "status": 0,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_5",
+        "categoryId": "cat_math_linalg",
+        "name": "連立一次方程式",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_6",
+        "categoryId": "cat_math_linalg",
+        "name": "掃き出し法",
+        "status": 0,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_7",
+        "categoryId": "cat_math_linalg",
+        "name": "階数",
+        "status": 0,
+        "weight": 1,
+        "order": 7,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_8",
+        "categoryId": "cat_math_linalg",
+        "name": "行列式",
+        "status": 0,
+        "weight": 1,
+        "order": 8,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_linalg_9",
+        "categoryId": "cat_math_linalg",
+        "name": "逆行列",
+        "status": 0,
+        "weight": 1,
+        "order": 9,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_0",
+        "categoryId": "cat_math_multivar",
+        "name": "多変数関数",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_1",
+        "categoryId": "cat_math_multivar",
+        "name": "偏微分",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_10",
+        "categoryId": "cat_math_multivar",
+        "name": "二重積分",
+        "status": 0,
+        "weight": 1,
+        "order": 10,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_12",
+        "categoryId": "cat_math_multivar",
+        "name": "積分順序の変更",
+        "status": 0,
+        "weight": 1,
+        "order": 12,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_13",
+        "categoryId": "cat_math_multivar",
+        "name": "変数変換",
+        "status": 0,
+        "weight": 1,
+        "order": 13,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_2",
+        "categoryId": "cat_math_multivar",
+        "name": "高階偏導関数",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_3",
+        "categoryId": "cat_math_multivar",
+        "name": "全微分",
+        "status": 0,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_4",
+        "categoryId": "cat_math_multivar",
+        "name": "合成関数の偏微分",
+        "status": 0,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_5",
+        "categoryId": "cat_math_multivar",
+        "name": "接平面",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_6",
+        "categoryId": "cat_math_multivar",
+        "name": "勾配",
+        "status": 0,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_7",
+        "categoryId": "cat_math_multivar",
+        "name": "多変数関数の極値",
+        "status": 0,
+        "weight": 1,
+        "order": 7,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_8",
+        "categoryId": "cat_math_multivar",
+        "name": "条件付き極値",
+        "status": 0,
+        "weight": 1,
+        "order": 8,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_multivar_9",
+        "categoryId": "cat_math_multivar",
+        "name": "ラグランジュ未定乗数法",
+        "status": 0,
+        "weight": 1,
+        "order": 9,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_0",
+        "categoryId": "cat_math_ode",
+        "name": "微分方程式とは何か",
+        "status": 0,
+        "weight": 1,
+        "order": 0,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_1",
+        "categoryId": "cat_math_ode",
+        "name": "変数分離形",
+        "status": 0,
+        "weight": 1,
+        "order": 1,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_2",
+        "categoryId": "cat_math_ode",
+        "name": "一階線形微分方程式",
+        "status": 0,
+        "weight": 1,
+        "order": 2,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_3",
+        "categoryId": "cat_math_ode",
+        "name": "同次形",
+        "status": 0,
+        "weight": 1,
+        "order": 3,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_4",
+        "categoryId": "cat_math_ode",
+        "name": "二階線形微分方程式",
+        "status": 0,
+        "weight": 1,
+        "order": 4,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_5",
+        "categoryId": "cat_math_ode",
+        "name": "定数係数微分方程式",
+        "status": 0,
+        "weight": 1,
+        "order": 5,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      },
+      {
+        "id": "topic_math_ode_6",
+        "categoryId": "cat_math_ode",
+        "name": "初期値問題",
+        "status": 0,
+        "weight": 1,
+        "order": 6,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000
+      }
+    ],
+    "studySessions": [
+      {
+        "id": "sess_09bc91d0-423d-4e46-bd79-a51183d3ee61",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": null,
+        "startedAt": 1786791600000,
+        "endedAt": 1786795200000,
+        "durationSec": 3600,
+        "source": "timer",
+        "createdAt": 1786795200000
+      },
+      {
+        "id": "sess_0ece6f97-1cb6-493e-a683-c5cffea195b2",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": null,
+        "startedAt": 1787397300000,
+        "endedAt": 1787400000000,
+        "durationSec": 2700,
+        "source": "manual",
+        "createdAt": 1787400000000
+      },
+      {
+        "id": "sess_13878c41-de5c-4150-bedd-fd014202c79f",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": null,
+        "startedAt": 1786446600000,
+        "endedAt": 1786449600000,
+        "durationSec": 3000,
+        "source": "timer",
+        "createdAt": 1786449600000
+      },
+      {
+        "id": "sess_1a0e2d6e-7dc9-4af7-b1a9-3c0e9759d97f",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": null,
+        "startedAt": 1787743200000,
+        "endedAt": 1787745600000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1787745600000
+      },
+      {
+        "id": "sess_251b3cba-5e53-485f-b0bf-6ea3b143f5e4",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": null,
+        "startedAt": 1789126200000,
+        "endedAt": 1789128000000,
+        "durationSec": 1800,
+        "source": "timer",
+        "createdAt": 1789128000000
+      },
+      {
+        "id": "sess_2f36f0f8-a0a0-4ef5-bc9f-a3b8d02ea9a0",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": null,
+        "startedAt": 1786619700000,
+        "endedAt": 1786622400000,
+        "durationSec": 2700,
+        "source": "manual",
+        "createdAt": 1786622400000
+      },
+      {
+        "id": "sess_3467fb95-e032-446c-8944-7767669a476d",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": null,
+        "startedAt": 1787224200000,
+        "endedAt": 1787227200000,
+        "durationSec": 3000,
+        "source": "timer",
+        "createdAt": 1787227200000
+      },
+      {
+        "id": "sess_3c964295-9467-4da9-a5c1-90231e3af626",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": null,
+        "startedAt": 1786707600000,
+        "endedAt": 1786708800000,
+        "durationSec": 1200,
+        "source": "timer",
+        "createdAt": 1786708800000
+      },
+      {
+        "id": "sess_3d69ebfc-d7ef-4529-8caf-de988d72afc8",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": null,
+        "startedAt": 1786964700000,
+        "endedAt": 1786968000000,
+        "durationSec": 3300,
+        "source": "timer",
+        "createdAt": 1786968000000
+      },
+      {
+        "id": "sess_437f407f-3db6-471b-acfd-bbdd794fe107",
+        "topicId": null,
+        "subjectId": null,
+        "startedAt": 1787920200000,
+        "endedAt": 1787922000000,
+        "durationSec": 1800,
+        "source": "manual",
+        "createdAt": 1787922000000
+      },
+      {
+        "id": "sess_4b6c50c4-3e4c-424d-830c-44479ad80f6b",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": null,
+        "startedAt": 1786533600000,
+        "endedAt": 1786536000000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1786536000000
+      },
+      {
+        "id": "sess_4f52748e-d036-42de-9761-c6bdd45703eb",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": null,
+        "startedAt": 1788001200000,
+        "endedAt": 1788004800000,
+        "durationSec": 3600,
+        "source": "timer",
+        "createdAt": 1788004800000
+      },
+      {
+        "id": "sess_50733949-3240-4687-8216-d1c491a1d439",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": null,
+        "startedAt": 1788087900000,
+        "endedAt": 1788091200000,
+        "durationSec": 3300,
+        "source": "timer",
+        "createdAt": 1788091200000
+      },
+      {
+        "id": "sess_557478d3-cb14-4ef5-80ef-d72adcdfc1be",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": null,
+        "startedAt": 1787829900000,
+        "endedAt": 1787832000000,
+        "durationSec": 2100,
+        "source": "timer",
+        "createdAt": 1787832000000
+      },
+      {
+        "id": "sess_5b0346ba-fee8-4fdc-bd4f-5df4e273b383",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": null,
+        "startedAt": 1788866700000,
+        "endedAt": 1788868800000,
+        "durationSec": 2100,
+        "source": "timer",
+        "createdAt": 1788868800000
+      },
+      {
+        "id": "sess_64a791f1-01e1-4f15-81f5-e5a3a9e685bc",
+        "topicId": "topic_math_linalg_3",
+        "subjectId": null,
+        "startedAt": 1788952200000,
+        "endedAt": 1788955200000,
+        "durationSec": 3000,
+        "source": "manual",
+        "createdAt": 1788955200000
+      },
+      {
+        "id": "sess_6784e402-ea5c-41d0-94bd-3a0c6ea6e2da",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": null,
+        "startedAt": 1787484600000,
+        "endedAt": 1787486400000,
+        "durationSec": 1800,
+        "source": "timer",
+        "createdAt": 1787486400000
+      },
+      {
+        "id": "sess_6950834f-57d4-4b1d-b9b1-881cb6e8abd9",
+        "topicId": "topic_math_hs-remedial_12",
+        "subjectId": null,
+        "startedAt": 1789211700000,
+        "endedAt": 1789214400000,
+        "durationSec": 2700,
+        "source": "manual",
+        "createdAt": 1789214400000
+      },
+      {
+        "id": "sess_6b7ff238-de26-43fe-a0ef-b2e66f6dc8af",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": null,
+        "startedAt": 1788433800000,
+        "endedAt": 1788436800000,
+        "durationSec": 3000,
+        "source": "manual",
+        "createdAt": 1788436800000
+      },
+      {
+        "id": "sess_71f14fb0-f187-4c14-8681-89c9ac72c1a2",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": null,
+        "startedAt": 1788607200000,
+        "endedAt": 1788609600000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1788609600000
+      },
+      {
+        "id": "sess_775971c4-da59-4d60-8a0a-6edf917ec795",
+        "topicId": null,
+        "subjectId": null,
+        "startedAt": 1788784200000,
+        "endedAt": 1788786000000,
+        "durationSec": 1800,
+        "source": "manual",
+        "createdAt": 1788786000000
+      },
+      {
+        "id": "sess_83e823d4-b0bc-4a74-877d-8a51668aa1b1",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": null,
+        "startedAt": 1787656200000,
+        "endedAt": 1787659200000,
+        "durationSec": 3000,
+        "source": "manual",
+        "createdAt": 1787659200000
+      },
+      {
+        "id": "sess_9c09e5c8-6c3e-4fe3-ab92-5182fa06c10c",
+        "topicId": null,
+        "subjectId": null,
+        "startedAt": 1786883400000,
+        "endedAt": 1786885200000,
+        "durationSec": 1800,
+        "source": "manual",
+        "createdAt": 1786885200000
+      },
+      {
+        "id": "sess_a0ea878c-b577-479e-9bc5-eb8e267fa0f4",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": null,
+        "startedAt": 1789384800000,
+        "endedAt": 1789387200000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1789387200000
+      },
+      {
+        "id": "sess_a5f09754-1c2a-4b5f-88a8-049ed1fea29e",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": null,
+        "startedAt": 1787139300000,
+        "endedAt": 1787140800000,
+        "durationSec": 1500,
+        "source": "manual",
+        "createdAt": 1787140800000
+      },
+      {
+        "id": "sess_b27247f1-d22c-409d-a62d-93d9cfae59d6",
+        "topicId": "topic_math_hs-remedial_9",
+        "subjectId": null,
+        "startedAt": 1788261600000,
+        "endedAt": 1788264000000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1788264000000
+      },
+      {
+        "id": "sess_b31fc8f8-4e48-4247-abc7-6f12272e4002",
+        "topicId": "topic_math_hs-remedial_10",
+        "subjectId": null,
+        "startedAt": 1788693300000,
+        "endedAt": 1788696000000,
+        "durationSec": 2700,
+        "source": "manual",
+        "createdAt": 1788696000000
+      },
+      {
+        "id": "sess_baa4ea3a-4b58-4ebf-9565-f420603c53de",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": null,
+        "startedAt": 1788347700000,
+        "endedAt": 1788350400000,
+        "durationSec": 2700,
+        "source": "timer",
+        "createdAt": 1788350400000
+      },
+      {
+        "id": "sess_bce4c30d-edb1-4516-b838-562b9f9bcd05",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": null,
+        "startedAt": 1787052000000,
+        "endedAt": 1787054400000,
+        "durationSec": 2400,
+        "source": "timer",
+        "createdAt": 1787054400000
+      }
+    ],
+    "reviews": [
+      {
+        "id": "rev_0938b92d-43cd-4e3c-a530-b55143ac546d",
+        "topicId": "topic_math_hs-remedial_1",
+        "stage": 0,
+        "dueAt": 1786374000000,
+        "createdAt": 1786359600000,
+        "completedAt": 1786611600000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_147c7c8b-21a1-4c54-883a-13a836b8d6a8",
+        "topicId": "topic_math_hs-remedial_3",
+        "stage": 1,
+        "dueAt": 1787324400000,
+        "createdAt": 1787130000000,
+        "completedAt": 1787562000000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_15e048e8-4b04-4199-9d03-3b2a03ae24d1",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 2,
+        "dueAt": 1788620400000,
+        "createdAt": 1788080400000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_25082186-d23a-4d6d-be0a-bfe60e157e06",
+        "topicId": "topic_math_hs-remedial_4",
+        "stage": 0,
+        "dueAt": 1789398000000,
+        "createdAt": 1789387200000
+      },
+      {
+        "id": "rev_2de63807-8b63-4f5d-a3fe-d47e471fff0b",
+        "topicId": "topic_math_hs-remedial_0",
+        "stage": 2,
+        "dueAt": 1787670000000,
+        "createdAt": 1787130000000,
+        "completedAt": 1788080400000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_33a41a5a-08a5-4eca-8e57-de800fe76122",
+        "topicId": "topic_math_hs-remedial_8",
+        "stage": 0,
+        "dueAt": 1788706800000,
+        "createdAt": 1788685200000,
+        "completedAt": 1789203600000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_459b2cb2-8f38-4bbb-a7f7-d0269157c300",
+        "topicId": "topic_math_hs-remedial_3",
+        "stage": 3,
+        "dueAt": 1789830000000,
+        "createdAt": 1788685200000
+      },
+      {
+        "id": "rev_46c901ad-5262-41b6-ae38-479c2cd822d7",
+        "topicId": "topic_math_hs-remedial_7",
+        "stage": 1,
+        "dueAt": 1788274800000,
+        "createdAt": 1788080400000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_4a2c25f2-8212-4314-8b52-0ade68bc8187",
+        "topicId": "topic_math_linalg_0",
+        "stage": 1,
+        "dueAt": 1789398000000,
+        "createdAt": 1789203600000
+      },
+      {
+        "id": "rev_50152d32-f2df-4c2d-9339-e8932f9941f5",
+        "topicId": "topic_math_hs-remedial_5",
+        "stage": 1,
+        "dueAt": 1789398000000,
+        "createdAt": 1789203600000
+      },
+      {
+        "id": "rev_557f1c9b-438d-42b7-a129-4a6686787e1a",
+        "topicId": "topic_math_hs-remedial_6",
+        "stage": 2,
+        "dueAt": 1789225200000,
+        "createdAt": 1788685200000
+      },
+      {
+        "id": "rev_68b07a09-2e88-407a-a548-b3206aca586e",
+        "topicId": "topic_math_hs-remedial_5",
+        "stage": 0,
+        "dueAt": 1787410800000,
+        "createdAt": 1787400000000,
+        "completedAt": 1787562000000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_6fead7d3-bb82-408b-b3d5-ba123fdf6a34",
+        "topicId": "topic_math_hs-remedial_8",
+        "stage": 1,
+        "dueAt": 1789398000000,
+        "createdAt": 1789203600000
+      },
+      {
+        "id": "rev_7745210f-08b2-4fde-ba43-04fc9f99e573",
+        "topicId": "topic_math_hs-remedial_1",
+        "stage": 2,
+        "dueAt": 1788102000000,
+        "createdAt": 1787562000000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_820ca7ab-b79a-46fd-b04a-f5a4e9a6936c",
+        "topicId": "topic_math_hs-remedial_1",
+        "stage": 3,
+        "dueAt": 1789830000000,
+        "createdAt": 1788685200000
+      },
+      {
+        "id": "rev_85b92b39-0171-4443-999c-02394cabbaff",
+        "topicId": "topic_math_hs-remedial_5",
+        "stage": 0,
+        "dueAt": 1788706800000,
+        "createdAt": 1788685200000,
+        "completedAt": 1789203600000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_87e7c823-f685-4dbd-a6b0-67e54cd10e16",
+        "topicId": "topic_math_hs-remedial_0",
+        "stage": 1,
+        "dueAt": 1786806000000,
+        "createdAt": 1786611600000,
+        "completedAt": 1787130000000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_888c31e0-0cd6-4def-942d-85fcd195a0cd",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 0,
+        "dueAt": 1786546800000,
+        "createdAt": 1786536000000,
+        "completedAt": 1786611600000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_8bda45ac-da29-4bd8-b398-26b43b8ae715",
+        "topicId": "topic_math_linalg_0",
+        "stage": 0,
+        "dueAt": 1788620400000,
+        "createdAt": 1788609600000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_909fbf4d-6cf1-4d54-84eb-ab76c25d54c4",
+        "topicId": "topic_math_hs-remedial_1",
+        "stage": 1,
+        "dueAt": 1787324400000,
+        "createdAt": 1787130000000,
+        "completedAt": 1787562000000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_92188e45-76fa-4ee6-8c82-966dabc7f8ae",
+        "topicId": "topic_math_hs-remedial_6",
+        "stage": 1,
+        "dueAt": 1788274800000,
+        "createdAt": 1788080400000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_92ee560c-0b25-4caa-a53b-70a326ad8f82",
+        "topicId": "topic_math_hs-remedial_0",
+        "stage": 0,
+        "dueAt": 1786374000000,
+        "createdAt": 1786359600000,
+        "completedAt": 1786611600000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_9672612e-8d88-4922-bca7-ab6fa73cf5c7",
+        "topicId": "topic_math_hs-remedial_11",
+        "stage": 1,
+        "dueAt": 1789398000000,
+        "createdAt": 1789203600000
+      },
+      {
+        "id": "rev_975cabd3-60c4-40f7-8f9e-1f66e2a30d43",
+        "topicId": "topic_math_hs-remedial_11",
+        "stage": 0,
+        "dueAt": 1789138800000,
+        "createdAt": 1789128000000,
+        "completedAt": 1789203600000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_9d87a8f1-1972-4915-a91a-91bf11e91ddc",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 0,
+        "dueAt": 1786633200000,
+        "createdAt": 1786611600000,
+        "completedAt": 1786784400000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_a02cfe00-b975-4e85-ab68-54d6c141e9ff",
+        "topicId": "topic_math_hs-remedial_3",
+        "stage": 0,
+        "dueAt": 1786806000000,
+        "createdAt": 1786795200000,
+        "completedAt": 1787130000000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_a26401ac-3ed7-4e51-8172-d9d3fa07dc84",
+        "topicId": "topic_math_hs-remedial_0",
+        "stage": 3,
+        "dueAt": 1789225200000,
+        "createdAt": 1788080400000
+      },
+      {
+        "id": "rev_acf3a9c1-9f7c-4bd0-bfe7-c1e083953a82",
+        "topicId": "topic_math_hs-remedial_3",
+        "stage": 2,
+        "dueAt": 1788102000000,
+        "createdAt": 1787562000000,
+        "completedAt": 1788685200000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_ad69702e-5e0f-455c-82f0-960a23683542",
+        "topicId": "topic_math_hs-remedial_7",
+        "stage": 0,
+        "dueAt": 1787842800000,
+        "createdAt": 1787832000000,
+        "completedAt": 1788080400000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_ae6c80bc-ed75-4629-aa22-251cb8b072c1",
+        "topicId": "topic_math_linalg_0",
+        "stage": 1,
+        "dueAt": 1788879600000,
+        "createdAt": 1788685200000,
+        "completedAt": 1789203600000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_c20f2204-f03e-4bf1-bdc6-d0c23d17fa34",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 1,
+        "dueAt": 1786978800000,
+        "createdAt": 1786784400000,
+        "completedAt": 1787130000000,
+        "outcome": "got",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_c80b59c2-ea43-4bea-b6d1-3359ddf35acb",
+        "topicId": "topic_math_hs-remedial_5",
+        "stage": 0,
+        "dueAt": 1788102000000,
+        "createdAt": 1788080400000,
+        "completedAt": 1788685200000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_c9413bd3-60df-49a6-abd8-7dd824c63fd9",
+        "topicId": "topic_math_hs-remedial_8",
+        "stage": 0,
+        "dueAt": 1788447600000,
+        "createdAt": 1788436800000,
+        "completedAt": 1788685200000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_cb479ab6-da90-4e7d-85b5-c0ad8d1ae335",
+        "topicId": "topic_math_hs-remedial_5",
+        "stage": 0,
+        "dueAt": 1787583600000,
+        "createdAt": 1787562000000,
+        "completedAt": 1788080400000,
+        "outcome": "failed",
+        "statusLowered": true
+      },
+      {
+        "id": "rev_d9e3fda3-fb0c-45fe-8e4d-23f6cfd20e4f",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 2,
+        "dueAt": 1787670000000,
+        "createdAt": 1787130000000,
+        "completedAt": 1788080400000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_dad28f1c-560f-44cc-8d8a-e83ac561b025",
+        "topicId": "topic_math_hs-remedial_2",
+        "stage": 3,
+        "dueAt": 1789830000000,
+        "createdAt": 1788685200000
+      },
+      {
+        "id": "rev_dca9f1b8-bbdc-4abf-9ecf-5a699b753112",
+        "topicId": "topic_math_hs-remedial_1",
+        "stage": 1,
+        "dueAt": 1786806000000,
+        "createdAt": 1786611600000,
+        "completedAt": 1787130000000,
+        "outcome": "shaky",
+        "statusLowered": false
+      },
+      {
+        "id": "rev_dd638ea6-b948-4895-a332-d1900c660eac",
+        "topicId": "topic_math_hs-remedial_7",
+        "stage": 2,
+        "dueAt": 1789225200000,
+        "createdAt": 1788685200000
+      },
+      {
+        "id": "rev_e54dd391-ce5f-4353-9e95-ccd6be76f844",
+        "topicId": "topic_math_hs-remedial_6",
+        "stage": 0,
+        "dueAt": 1787670000000,
+        "createdAt": 1787659200000,
+        "completedAt": 1788080400000,
+        "outcome": "got",
+        "statusLowered": false
+      }
+    ],
+    "dailyGoals": [
+      {
+        "id": "2026-08-10",
+        "date": "2026-08-10",
+        "text": "Day0: 高校数学を進める",
+        "done": true,
+        "createdAt": 1786316400000,
+        "updatedAt": 1786366800000
+      },
+      {
+        "id": "2026-08-12",
+        "date": "2026-08-12",
+        "text": "Day2: 高校数学を進める",
+        "done": false,
+        "createdAt": 1786489200000,
+        "updatedAt": 1786489200000
+      },
+      {
+        "id": "2026-08-14",
+        "date": "2026-08-14",
+        "text": "Day4: 高校数学を進める",
+        "done": true,
+        "createdAt": 1786662000000,
+        "updatedAt": 1786712400000
+      },
+      {
+        "id": "2026-08-16",
+        "date": "2026-08-16",
+        "text": "Day6: 高校数学を進める",
+        "done": false,
+        "createdAt": 1786834800000,
+        "updatedAt": 1786834800000
+      },
+      {
+        "id": "2026-08-18",
+        "date": "2026-08-18",
+        "text": "Day8: 高校数学を進める",
+        "done": true,
+        "createdAt": 1787007600000,
+        "updatedAt": 1787058000000
+      },
+      {
+        "id": "2026-08-20",
+        "date": "2026-08-20",
+        "text": "Day10: 高校数学を進める",
+        "done": false,
+        "createdAt": 1787180400000,
+        "updatedAt": 1787180400000
+      },
+      {
+        "id": "2026-08-22",
+        "date": "2026-08-22",
+        "text": "Day12: 高校数学を進める",
+        "done": true,
+        "createdAt": 1787353200000,
+        "updatedAt": 1787403600000
+      },
+      {
+        "id": "2026-08-24",
+        "date": "2026-08-24",
+        "text": "Day14: 高校数学を進める",
+        "done": false,
+        "createdAt": 1787526000000,
+        "updatedAt": 1787526000000
+      },
+      {
+        "id": "2026-08-26",
+        "date": "2026-08-26",
+        "text": "Day16: 高校数学を進める",
+        "done": true,
+        "createdAt": 1787698800000,
+        "updatedAt": 1787749200000
+      },
+      {
+        "id": "2026-08-28",
+        "date": "2026-08-28",
+        "text": "Day18: 高校数学を進める",
+        "done": false,
+        "createdAt": 1787871600000,
+        "updatedAt": 1787871600000
+      },
+      {
+        "id": "2026-08-30",
+        "date": "2026-08-30",
+        "text": "Day20: 高校数学を進める",
+        "done": true,
+        "createdAt": 1788044400000,
+        "updatedAt": 1788094800000
+      },
+      {
+        "id": "2026-09-01",
+        "date": "2026-09-01",
+        "text": "Day22: 高校数学を進める",
+        "done": false,
+        "createdAt": 1788217200000,
+        "updatedAt": 1788217200000
+      },
+      {
+        "id": "2026-09-03",
+        "date": "2026-09-03",
+        "text": "Day24: 高校数学を進める",
+        "done": true,
+        "createdAt": 1788390000000,
+        "updatedAt": 1788440400000
+      },
+      {
+        "id": "2026-09-05",
+        "date": "2026-09-05",
+        "text": "Day26: 高校数学を進める",
+        "done": false,
+        "createdAt": 1788562800000,
+        "updatedAt": 1788562800000
+      },
+      {
+        "id": "2026-09-07",
+        "date": "2026-09-07",
+        "text": "Day28: 高校数学を進める",
+        "done": true,
+        "createdAt": 1788735600000,
+        "updatedAt": 1788786000000
+      },
+      {
+        "id": "2026-09-09",
+        "date": "2026-09-09",
+        "text": "Day30: 高校数学を進める",
+        "done": false,
+        "createdAt": 1788908400000,
+        "updatedAt": 1788908400000
+      },
+      {
+        "id": "2026-09-11",
+        "date": "2026-09-11",
+        "text": "Day32: 高校数学を進める",
+        "done": true,
+        "createdAt": 1789081200000,
+        "updatedAt": 1789131600000
+      },
+      {
+        "id": "2026-09-13",
+        "date": "2026-09-13",
+        "text": "Day34: 高校数学を進める",
+        "done": false,
+        "createdAt": 1789254000000,
+        "updatedAt": 1789254000000
+      }
+    ],
+    "examScores": [
+      {
+        "examName": "電通大",
+        "year": 2023,
+        "subject": "数学",
+        "score": 48,
+        "maxScore": 120,
+        "durationMin": 120,
+        "date": "2026-09-04",
+        "id": "exam_7529bd65-c362-423e-af96-cbd675beb582",
+        "createdAt": 1788494400000
+      },
+      {
+        "examName": "電通大",
+        "year": 2024,
+        "subject": "数学",
+        "score": 61,
+        "maxScore": 120,
+        "date": "2026-09-13",
+        "id": "exam_b41c0da1-d518-4b3a-b35d-05eb5859051e",
+        "createdAt": 1789272000000
+      }
+    ],
+    "settings": [
+      {
+        "id": "app",
+        "schemaVersion": 1,
+        "examName": "電通大 情報理工学域Ⅰ類 3年次編入試験",
+        "examDate": "2027-07-10",
+        "primarySubjectId": "subj_math",
+        "theme": "dark",
+        "autoLowerStatusOnFailedReview": true,
+        "dailyStudyGoalMin": 90,
+        "weeklyStudyGoalMin": 480,
+        "createdAt": 1786356000000,
+        "updatedAt": 1786356000000,
+        "onboardedAt": 1786356000000
+      }
+    ],
+    "activityLogs": [
+      {
+        "id": "log_02d7879e-e612-4dc1-9aa1-e8996e99b6eb",
+        "type": "status_change",
+        "at": 1788436800000,
+        "message": "二次関数 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_071e3a9e-9282-4f69-92ed-be4a759f8b50",
+        "type": "status_change",
+        "at": 1787659200000,
+        "message": "関数とは何か を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_0d747434-305c-4ad4-a1cc-7dd1438a7a5e",
+        "type": "status_change",
+        "at": 1786359600000,
+        "message": "展開 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_1677341d-1d6f-4f90-98d6-157751c2b5fd",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "ベクトル の復習: できた",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_167eecef-1280-42b8-b429-6cd0db1fa12f",
+        "type": "review_done",
+        "at": 1788080400000,
+        "message": "平方根・指数の基本 の復習: できなかった",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "failed",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_16978936-02e8-40e6-ade4-4b25ab22364c",
+        "type": "goal_completed",
+        "at": 1787749200000,
+        "message": "今日の目標を達成: Day16: 高校数学を進める"
+      },
+      {
+        "id": "log_1d38dd26-bf5f-443f-979f-ac8dc29ab78f",
+        "type": "status_change",
+        "at": 1787227200000,
+        "message": "平方根・指数の基本 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_2136fe87-845f-4bf9-bb6b-ee202850ef10",
+        "type": "study_logged",
+        "at": 1787227200000,
+        "message": "平方根・指数の基本 を学習 (50分)",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3000,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_253f10e5-9930-4e2a-be06-bae89af35511",
+        "type": "review_done",
+        "at": 1788080400000,
+        "message": "方程式 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 2
+        }
+      },
+      {
+        "id": "log_25abba9e-5dbb-4c9f-8ead-4649328b90dc",
+        "type": "status_change",
+        "at": 1789128000000,
+        "message": "指数法則 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_26e8bd0a-e940-45eb-ade4-98e17cee1f12",
+        "type": "status_change",
+        "at": 1787486400000,
+        "message": "関数とは何か を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_27aad6f9-bcaf-4107-9bb4-2e884243b2e9",
+        "type": "topic_added",
+        "at": 1787320800000,
+        "message": "単元「期待値」を追加",
+        "topicId": "topic_58179be7-5e2e-4ae5-980f-36eed2a5b2e7"
+      },
+      {
+        "id": "log_2976c837-51c5-4cbd-acb9-5319c35e64e7",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "因数分解 の復習: できた",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 2
+        }
+      },
+      {
+        "id": "log_2a694433-9282-43dc-abba-a422a0d521a6",
+        "type": "status_change",
+        "at": 1788609600000,
+        "message": "ベクトル を「基本OK」に変更",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_2ae4e40d-1804-4c80-900a-948a9c109625",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "二次関数 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_2b30d817-3398-4938-8a4d-072b91dc3477",
+        "type": "status_change",
+        "at": 1786359600000,
+        "message": "因数分解 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_2bea97af-42e3-44f9-a810-c18263fb894e",
+        "type": "review_done",
+        "at": 1787562000000,
+        "message": "平方根・指数の基本 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_308161f8-28b4-4028-8d5d-f51470cb9af7",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "不等式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 2
+        }
+      },
+      {
+        "id": "log_322577aa-1e50-43ed-8a74-b7374ad2f720",
+        "type": "status_change",
+        "at": 1788955200000,
+        "message": "行列 を「学習中」に変更",
+        "topicId": "topic_math_linalg_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_351b4fa6-c69d-4899-9749-f8af3bd3321b",
+        "type": "study_logged",
+        "at": 1786795200000,
+        "message": "不等式 を学習 (60分)",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3600,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_36caa9af-6d0e-4d3c-9824-4deb417ab6cc",
+        "type": "goal_completed",
+        "at": 1788786000000,
+        "message": "今日の目標を達成: Day28: 高校数学を進める"
+      },
+      {
+        "id": "log_38d3acb3-bf6a-4c8a-a27d-286070f107bf",
+        "type": "study_logged",
+        "at": 1787832000000,
+        "message": "一次関数 を学習 (35分)",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2100,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_39f53e51-5441-4ff4-9e21-7646a99ccf3b",
+        "type": "study_logged",
+        "at": 1788786000000,
+        "message": "全体 を学習 (30分)",
+        "meta": {
+          "durationSec": 1800,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_3ac981c1-3304-41b9-bc70-4a3be87a6238",
+        "type": "status_change",
+        "at": 1788868800000,
+        "message": "指数法則 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_41421fe6-83da-4d2c-b36f-36825978ec4f",
+        "type": "study_logged",
+        "at": 1787659200000,
+        "message": "関数とは何か を学習 (50分)",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3000,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_424b6fed-2614-4bfd-9e08-485e9abfd611",
+        "type": "study_logged",
+        "at": 1786885200000,
+        "message": "全体 を学習 (30分)",
+        "meta": {
+          "durationSec": 1800,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_42e5a07e-a903-4da8-995f-4a61646abdd2",
+        "type": "study_logged",
+        "at": 1788868800000,
+        "message": "指数法則 を学習 (35分)",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2100,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_467b1987-02df-447e-a836-00f4472921c1",
+        "type": "status_change",
+        "at": 1786795200000,
+        "message": "不等式 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_4f8589f9-cf2a-4802-b72b-951764d268ed",
+        "type": "review_done",
+        "at": 1788080400000,
+        "message": "展開 の復習: できた",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 2
+        }
+      },
+      {
+        "id": "log_4fab54d6-e1fd-4309-8c02-4ce733996dc1",
+        "type": "study_logged",
+        "at": 1787745600000,
+        "message": "一次関数 を学習 (40分)",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_5134e550-7060-4652-8c09-64d96735bd4b",
+        "type": "review_done",
+        "at": 1786784400000,
+        "message": "方程式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_51c001fa-e8bf-4f02-9a96-d6e5668a8f3d",
+        "type": "review_done",
+        "at": 1786611600000,
+        "message": "展開 の復習: できた",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_571df556-f17c-47b7-994a-2c18e35b1b60",
+        "type": "status_change",
+        "at": 1786536000000,
+        "message": "方程式 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_5991f70d-3222-4e4f-b50b-bb5f1905e03f",
+        "type": "review_done",
+        "at": 1787130000000,
+        "message": "方程式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_59a8cb51-35a6-424d-9537-bf51a7460ed4",
+        "type": "goal_completed",
+        "at": 1787058000000,
+        "message": "今日の目標を達成: Day8: 高校数学を進める"
+      },
+      {
+        "id": "log_5af3b571-c700-402c-8103-354db11bc87a",
+        "type": "study_logged",
+        "at": 1788609600000,
+        "message": "ベクトル を学習 (40分)",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_5bdff25b-b7b8-4b65-844d-7ac282a84795",
+        "type": "study_logged",
+        "at": 1789214400000,
+        "message": "指数関数 を学習 (45分)",
+        "topicId": "topic_math_hs-remedial_12",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2700,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_5cf3c6c1-be62-43bc-b4b6-3c9852ab7e30",
+        "type": "exam_added",
+        "at": 1789272000000,
+        "message": "過去問を記録: 電通大2024 数学 61/120",
+        "meta": {
+          "score": 61,
+          "maxScore": 120
+        }
+      },
+      {
+        "id": "log_5f4d4040-7f83-4be9-87ee-7a0c08e27e77",
+        "type": "seed",
+        "at": 1786356000000,
+        "message": "数学ロードマップを作成しました",
+        "subjectId": "subj_math",
+        "meta": {
+          "categories": 7,
+          "topics": 94
+        }
+      },
+      {
+        "id": "log_5f92d430-c647-4631-951a-4deed8559923",
+        "type": "study_logged",
+        "at": 1788696000000,
+        "message": "グラフ を学習 (45分)",
+        "topicId": "topic_math_hs-remedial_10",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2700,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_656a8200-f532-4ece-8c33-0f41dd304a7c",
+        "type": "study_logged",
+        "at": 1788955200000,
+        "message": "行列 を学習 (50分)",
+        "topicId": "topic_math_linalg_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3000,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_65d207b4-3156-4df8-b57f-f6eab638c2c8",
+        "type": "study_logged",
+        "at": 1787922000000,
+        "message": "全体 を学習 (30分)",
+        "meta": {
+          "durationSec": 1800,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_668a50d5-9343-48c6-bd01-c21e74aed8de",
+        "type": "review_done",
+        "at": 1788080400000,
+        "message": "一次関数 の復習: できた",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_68b840e3-c09e-47cd-835c-157fc0a75bfe",
+        "type": "status_change",
+        "at": 1788080400000,
+        "message": "平方根・指数の基本 を「学習中」に変更 (復習)",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 2,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_6bdf97f7-7370-42a6-81ac-e5378ccfb32e",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "一次関数 の復習: できた",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_6c025a26-4d21-437d-acac-86f733d2168e",
+        "type": "study_logged",
+        "at": 1786708800000,
+        "message": "展開 を学習 (20分)",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 1200,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_6caa0254-1dd3-49cc-a9d1-a0c2af4a989f",
+        "type": "review_done",
+        "at": 1787130000000,
+        "message": "因数分解 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_70ff5605-d1d8-4dfc-ad5f-2cc18a294554",
+        "type": "exam_added",
+        "at": 1788494400000,
+        "message": "過去問を記録: 電通大2023 数学 48/120",
+        "meta": {
+          "score": 48,
+          "maxScore": 120
+        }
+      },
+      {
+        "id": "log_77ecb920-28ce-4cfe-9e6d-c9082b62d5a5",
+        "type": "study_logged",
+        "at": 1786622400000,
+        "message": "不等式 を学習 (45分)",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2700,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_7e2de5c0-8b34-4750-b0f3-eefa96667fb8",
+        "type": "study_logged",
+        "at": 1787486400000,
+        "message": "関数とは何か を学習 (30分)",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 1800,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_80e88710-bd77-465a-95df-14d4fb0c789c",
+        "type": "review_done",
+        "at": 1789203600000,
+        "message": "平方根・指数の基本 の復習: できた",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_8acaaff3-7703-4061-ba4e-faa0164e680e",
+        "type": "study_logged",
+        "at": 1786536000000,
+        "message": "方程式 を学習 (40分)",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_9162434a-485b-4932-a076-5a164ea03f41",
+        "type": "study_logged",
+        "at": 1789128000000,
+        "message": "指数法則 を学習 (30分)",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 1800,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_92f23e53-d34b-4866-b175-33a4a3efc7ac",
+        "type": "status_change",
+        "at": 1786968000000,
+        "message": "分数式 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_937d475e-2541-4fc0-93c5-7ef823ff7f18",
+        "type": "study_logged",
+        "at": 1788004800000,
+        "message": "二次関数 を学習 (60分)",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3600,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_968cd88f-63e1-4a0a-9aec-91802cd20e74",
+        "type": "goal_completed",
+        "at": 1787403600000,
+        "message": "今日の目標を達成: Day12: 高校数学を進める"
+      },
+      {
+        "id": "log_97033551-bfe6-442f-beaf-1045075eaa08",
+        "type": "review_done",
+        "at": 1786611600000,
+        "message": "因数分解 の復習: できた",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_9c695259-9573-416e-8815-1e53454f0c4b",
+        "type": "status_change",
+        "at": 1787400000000,
+        "message": "平方根・指数の基本 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_9db15b58-8f82-4dd3-9d52-d3df19c809ed",
+        "type": "study_logged",
+        "at": 1787054400000,
+        "message": "分数式 を学習 (40分)",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_9de4154e-e0cf-414e-8b2f-a3c90e09bd49",
+        "type": "study_logged",
+        "at": 1788436800000,
+        "message": "二次関数 を学習 (50分)",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3000,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_a415b305-79f2-439c-88f8-1e1143a2c03e",
+        "type": "status_change",
+        "at": 1788696000000,
+        "message": "グラフ を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_10",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_a6fa4aee-42c7-4d19-b617-749ac085d78b",
+        "type": "study_logged",
+        "at": 1787140800000,
+        "message": "因数分解 を学習 (25分)",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 1500,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_aa7ec47f-3c03-4534-aef0-d121686e22a1",
+        "type": "study_logged",
+        "at": 1786968000000,
+        "message": "分数式 を学習 (55分)",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3300,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_ad59a637-5814-4fd5-80d9-73452ff25197",
+        "type": "status_change",
+        "at": 1788004800000,
+        "message": "二次関数 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_ade7def1-716e-47c7-90a3-ba2d38c0d101",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "平方根・指数の基本 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_b406e00d-438f-4d76-a0db-7a77ac8b5cd6",
+        "type": "status_change",
+        "at": 1789214400000,
+        "message": "指数関数 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_12",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_b42c9e66-a2bc-47ff-a5f7-2a70852c9909",
+        "type": "status_change",
+        "at": 1787140800000,
+        "message": "因数分解 を「定着」に変更",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 2,
+          "to": 3
+        }
+      },
+      {
+        "id": "log_b72c2a09-bfa5-4cb5-871e-64ad19d01ac4",
+        "type": "status_change",
+        "at": 1788264000000,
+        "message": "定義域・値域 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_9",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_b80cd644-b2ac-4c97-841a-0a8f6ce5035d",
+        "type": "topic_added",
+        "at": 1787320800000,
+        "message": "単元「確率の基本」を追加",
+        "topicId": "topic_06c8c45d-5329-455b-929e-572e31a284ee"
+      },
+      {
+        "id": "log_b9742e35-5f27-4105-82fe-db1d5d383f01",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "関数とは何か の復習: できた",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_bafdf8b3-da7f-4a97-9ec7-2877aee4f694",
+        "type": "status_change",
+        "at": 1786622400000,
+        "message": "不等式 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_bb12ae02-6ee1-4f4d-a08d-3c8210da0036",
+        "type": "review_done",
+        "at": 1789203600000,
+        "message": "二次関数 の復習: できた",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_bc6434d3-9f4f-4246-8efc-2c816cf94832",
+        "type": "review_done",
+        "at": 1787130000000,
+        "message": "不等式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_be16eb39-f645-4cdd-a6bf-7ed063b6c2a9",
+        "type": "status_change",
+        "at": 1789387200000,
+        "message": "分数式 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_be73abe9-01df-43de-bc83-cd2f935c24c2",
+        "type": "review_done",
+        "at": 1786611600000,
+        "message": "方程式 の復習: 怪しい",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_c1c2f9f9-8972-49a2-8eca-c877d405eb36",
+        "type": "study_logged",
+        "at": 1787400000000,
+        "message": "平方根・指数の基本 を学習 (45分)",
+        "topicId": "topic_math_hs-remedial_5",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2700,
+          "source": "manual"
+        }
+      },
+      {
+        "id": "log_c2067176-8ff6-4529-bc32-2182db8f3a05",
+        "type": "review_done",
+        "at": 1789203600000,
+        "message": "ベクトル の復習: 怪しい",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "shaky",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_c308533a-1eae-4edd-8882-b7f77e65e0ff",
+        "type": "status_change",
+        "at": 1787745600000,
+        "message": "一次関数 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_c4a5242d-aca6-4cf7-b1b4-969c6f1fe61f",
+        "type": "study_logged",
+        "at": 1789387200000,
+        "message": "分数式 を学習 (40分)",
+        "topicId": "topic_math_hs-remedial_4",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_c4b5f9d6-9be0-4340-9d19-c424b3e4d294",
+        "type": "study_logged",
+        "at": 1788264000000,
+        "message": "定義域・値域 を学習 (40分)",
+        "topicId": "topic_math_hs-remedial_9",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2400,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_cd58addc-6f6b-49a9-b8a2-0a4cf65de284",
+        "type": "review_done",
+        "at": 1788080400000,
+        "message": "関数とは何か の復習: できた",
+        "topicId": "topic_math_hs-remedial_6",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_ce3c2fbd-f052-4019-b159-dd049b1ac2e5",
+        "type": "status_change",
+        "at": 1788350400000,
+        "message": "ベクトル を「学習中」に変更",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_cf8e0668-5a8c-4f6e-af9a-f07d43e9240b",
+        "type": "review_done",
+        "at": 1787562000000,
+        "message": "因数分解 の復習: できた",
+        "topicId": "topic_math_hs-remedial_1",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_d5b5a006-e014-41f5-b2e8-9a5f38eeb4ba",
+        "type": "review_done",
+        "at": 1787130000000,
+        "message": "展開 の復習: できた",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_d9370e0f-8e0e-42e0-9491-921107f28bb5",
+        "type": "study_logged",
+        "at": 1788350400000,
+        "message": "ベクトル を学習 (45分)",
+        "topicId": "topic_math_linalg_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 2700,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_d9ce6162-dc2a-4fa4-a471-bfbbf0429e2a",
+        "type": "study_logged",
+        "at": 1788091200000,
+        "message": "二次関数 を学習 (55分)",
+        "topicId": "topic_math_hs-remedial_8",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3300,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_da76f16d-0d56-46bb-b0b9-aab138794a20",
+        "type": "status_change",
+        "at": 1786708800000,
+        "message": "展開 を「定着」に変更",
+        "topicId": "topic_math_hs-remedial_0",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 2,
+          "to": 3
+        }
+      },
+      {
+        "id": "log_e21eafac-5e75-4a51-9372-8169355843c7",
+        "type": "goal_completed",
+        "at": 1788094800000,
+        "message": "今日の目標を達成: Day20: 高校数学を進める"
+      },
+      {
+        "id": "log_e2c44bab-f9ef-4f35-b9ed-b2b3f6e9d068",
+        "type": "review_done",
+        "at": 1787562000000,
+        "message": "不等式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_3",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 1
+        }
+      },
+      {
+        "id": "log_e6fe8ab5-acef-4bab-a265-d15780a7b9b1",
+        "type": "status_change",
+        "at": 1786449600000,
+        "message": "方程式 を「学習中」に変更",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 0,
+          "to": 1
+        }
+      },
+      {
+        "id": "log_e86448a8-563c-4d2d-96a5-816a02cef24f",
+        "type": "study_logged",
+        "at": 1786449600000,
+        "message": "方程式 を学習 (50分)",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "durationSec": 3000,
+          "source": "timer"
+        }
+      },
+      {
+        "id": "log_ea0c0540-4df7-4729-8dc3-5dffa07f7af4",
+        "type": "review_done",
+        "at": 1789203600000,
+        "message": "指数法則 の復習: できた",
+        "topicId": "topic_math_hs-remedial_11",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 0
+        }
+      },
+      {
+        "id": "log_ee77b399-7a30-455f-bf97-b202fe05be7f",
+        "type": "topic_added",
+        "at": 1787320800000,
+        "message": "単元「絶対値」を追加",
+        "topicId": "topic_28862de1-56d8-4ba0-a61a-6bb73a1e35df"
+      },
+      {
+        "id": "log_f26bc4ee-a1d7-4459-94b1-deb7af615050",
+        "type": "status_change",
+        "at": 1787832000000,
+        "message": "一次関数 を「基本OK」に変更",
+        "topicId": "topic_math_hs-remedial_7",
+        "subjectId": "subj_math",
+        "meta": {
+          "from": 1,
+          "to": 2
+        }
+      },
+      {
+        "id": "log_f44ab69f-a8df-4ef4-9596-f985dcc82b3c",
+        "type": "goal_completed",
+        "at": 1789131600000,
+        "message": "今日の目標を達成: Day32: 高校数学を進める"
+      },
+      {
+        "id": "log_f453d859-01a3-4699-8ec2-5a8bf267bb4c",
+        "type": "goal_completed",
+        "at": 1786366800000,
+        "message": "今日の目標を達成: Day0: 高校数学を進める"
+      },
+      {
+        "id": "log_f55698c3-3fd4-42ec-a482-36df6242e553",
+        "type": "goal_completed",
+        "at": 1788440400000,
+        "message": "今日の目標を達成: Day24: 高校数学を進める"
+      },
+      {
+        "id": "log_f5ce65a6-e060-40f3-90ac-0646b094c3d0",
+        "type": "review_done",
+        "at": 1788685200000,
+        "message": "方程式 の復習: できた",
+        "topicId": "topic_math_hs-remedial_2",
+        "subjectId": "subj_math",
+        "meta": {
+          "outcome": "got",
+          "stage": 2
+        }
+      },
+      {
+        "id": "log_f7f67794-39df-43e1-9674-e3f1bb3014ef",
+        "type": "goal_completed",
+        "at": 1786712400000,
+        "message": "今日の目標を達成: Day4: 高校数学を進める"
+      }
+    ]
+  }
+}
